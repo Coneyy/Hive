@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7405dc040cf838e4a95c31eeb109b013
+timeCreated: 1488886317
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - controlPanel: {instanceID: 0}
+  - progressLabel: {instanceID: 0}
+  - prefab: {fileID: 1000014215385098, guid: beb31278429d4bf40a4d736d2182cb22, type: 2}
+  - spawnPoint: {fileID: 1302058281019036, guid: 07262c6fcebe68e44b67f935fd41db4d,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

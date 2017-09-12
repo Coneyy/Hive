@@ -1,0 +1,11 @@
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\bin\Debug\netcoreapp1.1\HiveAPI.deps.json
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\bin\Debug\netcoreapp1.1\HiveAPI.runtimeconfig.json
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\bin\Debug\netcoreapp1.1\HiveAPI.runtimeconfig.dev.json
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\bin\Debug\netcoreapp1.1\HiveAPI.dll
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\obj\Debug\netcoreapp1.1\HiveAPI.csprojResolveAssemblyReference.cache
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\obj\Debug\netcoreapp1.1\HiveAPI.csproj.CoreCompileInputs.cache
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\obj\Debug\netcoreapp1.1\HiveAPI.AssemblyInfoInputs.cache
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\obj\Debug\netcoreapp1.1\HiveAPI.AssemblyInfo.cs
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\bin\Debug\netcoreapp1.1\HiveAPI.pdb
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\obj\Debug\netcoreapp1.1\HiveAPI.dll
+D:\HiveV2\HiveAPI\HiveAPI\HiveAPI\obj\Debug\netcoreapp1.1\HiveAPI.pdb
