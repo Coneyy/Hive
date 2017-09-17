@@ -7,13 +7,9 @@ public class LoginClick : MonoBehaviour {
 	GameObject imageTarget;
 
 
-	// Use this for initialization
-	void Start () {
-		imageTarget=GameObject.Find("ImageTarget");
-		imageTarget.SetActive(true);
-	}
-	public void fun()
+	public void onClick()
 	{
+		Debug.Log ("Login click!");
 
 	}
 }
