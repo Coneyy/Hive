@@ -23,7 +23,7 @@ public class LoginClick : MonoBehaviour
 
     public void Start()
     {
-        manager = GameObject.Find("PlayerManager");
+        manager = GameObject.Find("Manager");
         playerManager = manager.GetComponent<IPlayerManager>();
 
         var usernameField = GameObject.FindGameObjectWithTag("LoginUsername");
