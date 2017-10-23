@@ -16,6 +16,7 @@ namespace HiveAPI
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=Hive.Players;Trusted_Connection=True;";
             services.AddDbContext<UserContext>(opt => opt.UseInMemoryDatabase());
             services.AddMvc();
         }

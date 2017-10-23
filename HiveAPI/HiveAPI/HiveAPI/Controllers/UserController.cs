@@ -20,11 +20,11 @@ namespace HiveAPI.Controllers
 
             if (_context.Users.Count() == 0)
             {
-                _context.Users.Add(new User { Name = "ExampleUser", Email = "example@example.com", Password="1234"  });
+                _context.Users.Add(new User("ExampleUser", "example@example.com", "1234"));
                 _context.SaveChanges();
             }
         }
-        
+
         [HttpGet]
         public IEnumerable<User> GetAll()
         {
@@ -32,7 +32,7 @@ namespace HiveAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "GetUser")]
-        public IActionResult GetById(long id)
+        public IActionResult GetById(Guid id)
         {
             var user = _context.Users.FirstOrDefault(t => t.Id == id);
             if (user == null)
@@ -43,21 +43,36 @@ namespace HiveAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] User user)
+        [Route("signin")]
+        public IActionResult SignIn([FromBody] User loginUser)
         {
+            var user = _context.Users.Where(u => (u.Username.Equals(loginUser.Username) || u.Email.Equals(loginUser.Email)) && u.Password.Equals(loginUser.Password)).SingleOrDefault();
             if (user == null)
+            {
+                return NoContent();
+            }
+
+            return new ObjectResult(new UserDto(user));
+        }
+
+        [HttpPost(Name = "CreateUser")]
+        [Route("create")]
+        public IActionResult Create([FromBody] User createUser)
+        {
+            var user = _context.Users.Where(u => (u.Username.Equals(createUser.Username) || u.Email.Equals(createUser.Email)) && u.Password.Equals(createUser.Password)).SingleOrDefault();
+            if (user != null)
             {
                 return BadRequest();
             }
 
-            _context.Users.Add(user);
+            var newUser = new User(createUser.Username, createUser.Email, createUser.Password);
+            _context.Users.Add(newUser);
             _context.SaveChanges();
-
-            return CreatedAtRoute("GetUser", new { id = user.Id }, user);
+            return CreatedAtRoute("CreateUser", new UserDto(newUser));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] User user)
+        public IActionResult Update(Guid id, [FromBody] UserDto user, [FromBody] string password)
         {
             if (user == null || user.Id != id)
             {
@@ -70,9 +85,9 @@ namespace HiveAPI.Controllers
                 return NotFound();
             }
             
-            dbUser.Name = user.Name;
+            dbUser.Username = user.Username;
             dbUser.Email = user.Email;
-            dbUser.Password = user.Password;
+            dbUser.Password = password;
 
             _context.Users.Update(dbUser);
             _context.SaveChanges();
@@ -80,7 +95,7 @@ namespace HiveAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(Guid id)
         {
             var dbUser = _context.Users.FirstOrDefault(t => t.Id == id);
             if (dbUser == null)

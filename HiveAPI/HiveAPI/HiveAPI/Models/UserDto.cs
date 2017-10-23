@@ -5,24 +5,25 @@ using System.Threading.Tasks;
 
 namespace HiveAPI.Models
 {
-    public class User
+    public class UserDto
     {
-        public User()
+        public UserDto(Guid id,string name, string email)
         {
-
+            Id = id;
+            Username = name;
+            Email = email;
         }
 
-        public User(string username, string email, string password)
+        public UserDto(User user)
         {
-            Id = Guid.NewGuid();
-            Username = username;
-            Email = email;
-            Password = password;
+            Id = user.Id;
+            Username = user.Username;
+            Email = user.Email;
         }
 
         public Guid Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+
     }
 }

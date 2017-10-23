@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Hive.Assets.Scripts.Network.PlayerInfrastructure;
 
 public class CodeGUI : MonoBehaviour
 {
@@ -24,8 +25,21 @@ public class CodeGUI : MonoBehaviour
     GameObject manager;
     GameObject bottomBar;
     SelectManager SManager;
+    GameObject LoggingMenu; //menu (canvas) z logowaniem i rejestracja
+    
 
-
+    private void OnEnable()
+    {
+        //menu       
+        PlayerManager.PlayerSignedIn += DisableLoggingMenu;
+        PlayerManager.PlayerSignedUp += DisableLoggingMenu;
+    }
+    private void OnDisable()
+    {
+        //menu       
+        PlayerManager.PlayerSignedIn -= DisableLoggingMenu;
+        PlayerManager.PlayerSignedUp -= DisableLoggingMenu;
+    }
 
     void Start()
     {
@@ -46,7 +60,9 @@ public class CodeGUI : MonoBehaviour
 
         bottomBar.transform.position = startingPosition;
 
+        LoggingMenu = GameObject.Find("LoginCanvas");
     }
+
     public void hideBottomBar()
     {
         hideBottomBarBool = true;
@@ -143,5 +159,9 @@ public class CodeGUI : MonoBehaviour
         }
     }
 
+    private void DisableLoggingMenu()
+    {
+        LoggingMenu.SetActive(false);
+    }
 
 }
