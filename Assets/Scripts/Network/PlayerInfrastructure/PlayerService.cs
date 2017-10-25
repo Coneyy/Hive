@@ -15,65 +15,85 @@ using System.Text.RegularExpressions;
 using Assets.Scripts.Network.PlayerInfrastructure.Models;
 
 public class PlayerService : IPlayerService
-{    
+{
     public HivePlayer LogIn(string emailOrUsername, string password)
     {
         var player = new HivePlayer(emailOrUsername, password);
         string json = JsonUtility.ToJson(player);
-        Debug.Log(player.Username);
-        Debug.Log(player.Email);
-        Debug.Log(player.Password);
+
+        Debug.Log(player.Username + " " + player.Email + " " + player.Password + " ");
         Debug.Log(json);
 
-        byte[] pData = Encoding.ASCII.GetBytes(json.ToCharArray());
+        string response;
 
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiSettings.ApiUrl + "/user/signin");
-        request.Method = "POST";
-        request.KeepAlive = true;
-        request.ContentType = "application/json";
-        request.ContentLength = pData.Length;
-
-        Stream requestStream = request.GetRequestStream();
-        requestStream.Write(pData, 0, pData.Length);
-        requestStream.Close();
-
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        string myResponse = "EMPTY";
-        
-        using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream()))
+        try
         {
-            myResponse = sr.ReadToEnd();
-        }
+            response = GetLoginHttpResponseString(json);
 
-        if (response.StatusCode == HttpStatusCode.NoContent)
+            Debug.Log(response);
+
+            var returnPlayer = JsonUtility.FromJson<HivePlayer>(response);
+
+            Debug.Log(returnPlayer.Username + returnPlayer.Email + returnPlayer.Id);
+
+            return returnPlayer;
+        }
+        catch (NotFoundException nfe)
         {
-            throw new NotFoundException();
+            throw new Exception("Wrong credentials");
         }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 
-        Debug.Log(myResponse);
+    public HivePlayer Register(string email, string username, string password)
+    {
+        var player = new HivePlayer(username, email, password);
+        string json = JsonUtility.ToJson(player);
 
-        var returnPlayer = JsonUtility.FromJson<HivePlayer>(myResponse);
+        Debug.Log(player.Email +  " " + player.Password);
+        Debug.Log(json);
 
-        Debug.Log(returnPlayer.Username + returnPlayer.Email + returnPlayer.Id);
-        
-        return returnPlayer;
+        string response;
+
+        try
+        {
+            response = GetRegisterHttpResponseString(json);
+
+            Debug.Log("Odpowiedz serwera" + response);
+
+            var returnPlayer = JsonUtility.FromJson<HivePlayer>(response);
+
+            return returnPlayer;
+        }
+        catch (WebException wex)
+        {
+            if (((HttpWebResponse)wex.Response).StatusCode == HttpStatusCode.BadRequest)
+            {
+                throw new Exception("User already exists");
+            }
+            else
+            {
+                throw new Exception(wex.Message);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }   
     }
 
     public void LogOut()
     {
     }
 
-    public HivePlayer SignUp(string email, string username, string password)
+    private string GetLoginHttpResponseString(string PlayerJson)
     {
-        var player = new HivePlayer( username, email, password);
-        string json = JsonUtility.ToJson(player);
-        Debug.Log(player.Email);
-        Debug.Log(player.Password);
-        Debug.Log(json);
+        byte[] pData = Encoding.ASCII.GetBytes(PlayerJson.ToCharArray());
 
-        byte[] pData = Encoding.ASCII.GetBytes(json.ToCharArray());
-
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiSettings.ApiUrl + "/user/create");
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrls.ApiLogInUrl);
         request.Method = "POST";
         request.KeepAlive = true;
         request.ContentType = "application/json";
@@ -84,18 +104,44 @@ public class PlayerService : IPlayerService
         requestStream.Close();
 
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-       
+
+        if (response.StatusCode == HttpStatusCode.NoContent)
+        {
+            throw new NotFoundException();
+        }
+
+        string myResponse = "EMPTY";
+
+        using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream()))
+        {
+            myResponse = sr.ReadToEnd();
+        }
+
+        return myResponse;
+    }
+
+    private string GetRegisterHttpResponseString(string PlayerJson)
+    {
+        byte[] pData = Encoding.ASCII.GetBytes(PlayerJson.ToCharArray());
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrls.ApiCreateUserUrl);
+        request.Method = "POST";
+        request.KeepAlive = true;
+        request.ContentType = "application/json";
+        request.ContentLength = pData.Length;
+
+        Stream requestStream = request.GetRequestStream();
+        requestStream.Write(pData, 0, pData.Length);
+        requestStream.Close();
+
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
         string myResponse = "EMPTY";
         using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream()))
         {
             myResponse = sr.ReadToEnd();
-        }           
+        }
 
-        Debug.Log("Odpowiedz serwera" + myResponse);
-
-        var returnPlayer = JsonUtility.FromJson<HivePlayer>(myResponse);
-        
-        return returnPlayer;
+        return myResponse;
     }
-
 }

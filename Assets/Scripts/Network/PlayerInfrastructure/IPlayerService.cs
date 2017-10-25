@@ -9,7 +9,7 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure
 
         void LogOut();
 
-		HivePlayer SignUp(string email, string username, string password );
+		HivePlayer Register(string email, string username, string password );
 
     }
 }

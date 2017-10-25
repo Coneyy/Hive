@@ -18,7 +18,7 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure
         {
         }
 
-        public HivePlayer SignUp(string email, string username, string password)
+        public HivePlayer Register(string email, string username, string password)
         {
             return new HivePlayer("player", "player@gmail.com");
         }

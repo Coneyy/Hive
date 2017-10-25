@@ -3,60 +3,134 @@ using System.Collections.Generic;
 using UnityEngine;
 using Hive.Assets.Scripts.Network.PlayerInfrastructure;
 using Hive.Assets.Scripts.Network.PlayerInfrastructure.Models;
+using UnityEngine.UI;
+using System.Net;
+using Assets.Scripts.Network.PlayerInfrastructure.Models;
+using System;
 
 public class PlayerManager : IPlayerManager
 {
-    public static event SignedIn PlayerSignedIn;
-    public static event SignedUp PlayerSignedUp;
+    public static event LoggedIn PlayerLoggedIn;
+    public static event Registered PlayerRegistered;
 
-    public delegate void SignedIn();
-    public delegate void SignedUp();
+    public delegate void LoggedIn();
+    public delegate void Registered();
+    
+    private Text loginNotifier;
+    private Text registerNotifier;
 
+    public void Start()
+    {
+        registerNotifier = GameObject.FindGameObjectWithTag("RegisterNotifier").GetComponent<Text>();        
+        loginNotifier = GameObject.FindGameObjectWithTag("LoginNotifier").GetComponent<Text>();
+    }
+
+    private void OnEnable()
+    {
+        LoginClick.LoginClicked += LogPlayerIn;
+        RegisterClick.RegisteredClicked += RegisterPlayer;
+    }
+
+    private void OnDisable()
+    {
+        LoginClick.LoginClicked -= LogPlayerIn;
+        RegisterClick.RegisteredClicked -= RegisterPlayer;
+    }
+    
     public PlayerManager()
     {
-        _playerService = new FakePlayerService();
+        _playerService = new PlayerService();
         _sessionService = new SessionService();
     }
 
-    public override void RegisterPlayer(string email, string username, string password)
+    public override void RegisterPlayer(string email, string username, string password, string confirmPassword)
     {
-		var newPlayer = _playerService.SignUp(email,username,password);
-        if (newPlayer != null)
+        try
         {
-            _sessionService.UpdateCurrentSession(newPlayer);
-            _sessionService.UpdateCurrentSession(newPlayer);
-            OnPlayerSignedUp();
-        }    
+            if (password.Equals(confirmPassword))
+            {
+                var newPlayer = _playerService.Register(email, username, password);
+                if (newPlayer != null)
+                {
+                    _sessionService.UpdateCurrentSession(newPlayer);
+                    _sessionService.UpdateCurrentSession(newPlayer);
+                    OnPlayerRegistered();
+                }
+            }
+            else
+            {
+                SetRegisterError("Passwords does not match");
+            }
+        }
+        catch (Exception ex)
+        {
+            SetRegisterError(ex.Message);
+        }
+
         Debug.Log("Player registered, session:" + SessionSingleton.Session.Player.Username);
     }
 
-    public override void SignPlayerIn(string emailOrUsername, string password)
+    public override void LogPlayerIn(string emailOrUsername, string password)
     {
-        var player = _playerService.LogIn(emailOrUsername,password);
-        if (player!= null)
+        try
         {
-            _sessionService.UpdateCurrentSession(player);
-            OnPlayerSignedIn();
+            var player = _playerService.LogIn(emailOrUsername, password);
+            if (player != null)
+            {
+                _sessionService.UpdateCurrentSession(player);
+                OnPlayerLoggedIn();
+            }
+            ClearNotifications();
+        }
+        catch (Exception ex)
+        {
+            SetLoginError(ex.Message);
         }
 
         Debug.Log("Player logged in, session:" + SessionSingleton.Session.Player.Username);
     }
 
-    public override void SignPlayerOut()
+    public override void LogPlayerOut()
     {
         _playerService.LogOut();
         _sessionService.ClearCurrentSession();
         Debug.Log("Session cleared");
     }
 
-    private void OnPlayerSignedIn()
+
+
+    private void SetLoginError(string error)
     {
-        PlayerSignedIn();
+        loginNotifier.text = error;
     }
 
-    private void OnPlayerSignedUp()
+    private void SetRegisterError(string error)
     {
-        PlayerSignedUp();
+        registerNotifier.text = error;
+    }
+
+    private void ClearNotifications()
+    {
+        loginNotifier.text = "";
+        registerNotifier.text = "";
+    }
+
+
+
+    private void OnPlayerLoggedIn()
+    {
+        if (PlayerLoggedIn != null)
+        {
+            PlayerLoggedIn();
+        }
+    }
+
+    private void OnPlayerRegistered()
+    {
+        if (PlayerRegistered != null)
+        {
+            PlayerRegistered();
+        }
     }
 
 }

@@ -31,14 +31,14 @@ public class CodeGUI : MonoBehaviour
     private void OnEnable()
     {
         //menu       
-        PlayerManager.PlayerSignedIn += DisableLoggingMenu;
-        PlayerManager.PlayerSignedUp += DisableLoggingMenu;
+        PlayerManager.PlayerLoggedIn += DisableLoggingMenu;
+        PlayerManager.PlayerRegistered += DisableLoggingMenu;
     }
     private void OnDisable()
     {
         //menu       
-        PlayerManager.PlayerSignedIn -= DisableLoggingMenu;
-        PlayerManager.PlayerSignedUp -= DisableLoggingMenu;
+        PlayerManager.PlayerLoggedIn -= DisableLoggingMenu;
+        PlayerManager.PlayerRegistered -= DisableLoggingMenu;
     }
 
     void Start()

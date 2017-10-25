@@ -15,11 +15,11 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure
 
          protected IPlayerService _playerService {get; set;}
 
-         public abstract void RegisterPlayer(string email, string username, string password);
+         public abstract void RegisterPlayer(string email, string username, string password, string confirmPassword);
 
-         public abstract void SignPlayerIn(string emailOrUsername, string password);
+         public abstract void LogPlayerIn(string emailOrUsername, string password);
 
-         public abstract void SignPlayerOut();
+         public abstract void LogPlayerOut();
 
     }
 }
