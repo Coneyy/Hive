@@ -12,18 +12,19 @@ public class NetworkManager : Photon.PunBehaviour
     /// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
     /// </summary>   
     [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-    public byte MaxPlayersPerRoom = 4;
+    public byte MaxPlayersPerRoom = 2;
    
 
     public GameObject prefab;
-    public GameObject baseprefab;
+//    public GameObject baseprefab;
     public GameObject spawnPoint;
     public GameObject spawnPoint2;
     #endregion
 
 
     #region Private Variables
-
+	GameObject manager;
+	FogOfWar fog;
 
     /// <summary>
     /// This client's version number. Users are separated from each other by gameversion (which allows you to make breaking changes).
@@ -42,6 +43,9 @@ public class NetworkManager : Photon.PunBehaviour
     /// </summary>
     void Awake()
     {
+		manager = GameObject.Find ("Manager");
+		fog = manager.GetComponent<FogOfWar>();
+
         // #NotImportant
         // Force LogLevel
         PhotonNetwork.logLevel = Loglevel;
@@ -113,7 +117,7 @@ public class NetworkManager : Photon.PunBehaviour
             FogOfWar fog = Manager.GetComponent<FogOfWar>();
             if (isPlayerOne)
             {
-                
+				Player.DefaultPlayer = RtsManager.Current.Players [0];
                 
 
 				var go = PhotonNetwork.Instantiate("Photon_prefabs/NotAnimated/"+this.prefab.name, spawnPoint2.transform.position, Quaternion.identity, 0);
@@ -135,6 +139,8 @@ public class NetworkManager : Photon.PunBehaviour
             }
             else
             {
+				Player.DefaultPlayer = RtsManager.Current.Players [1];
+
 
                 var go = PhotonNetwork.Instantiate(this.prefab.name, spawnPoint.transform.position, Quaternion.identity, 0);
                 ShowUnitInfo info = go.GetComponent<ShowUnitInfo>();
@@ -218,6 +224,20 @@ public class NetworkManager : Photon.PunBehaviour
 
 
     }
+
+	public void SpawnNewUnit(Vector3 position)
+	{
+		if (PhotonNetwork.connected) 
+		{
+			var go = PhotonNetwork.Instantiate(this.prefab.name, position, Quaternion.identity, 0);
+			ShowUnitInfo info = go.GetComponent<ShowUnitInfo>();
+			info.create("Arkadiusz", "ANT");
+			if (info.photonView.isMine)
+				fog.addRevealer(go);
+			else
+				RtsManager.Current.enemies.Add(go);
+		}
+	}
 
 
     #endregion

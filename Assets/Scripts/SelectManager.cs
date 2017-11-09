@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using System;
 
@@ -30,6 +31,19 @@ public class SelectManager : MonoBehaviour
         change.z = 30;
         // wektor change do funkcji closetoSMM
     }
+
+	void dselectAll()
+	{
+		if (Selections.Count > 0) // i jest cokolwiek w liście 
+		{
+			foreach (var sel in Selections)
+			{
+				if (sel != null)
+					sel.Dselect(); // to odznacz 
+			}
+			Selections.Clear(); // i wyczyść listę
+		}
+	}
     void Update()
     {
         if (Input.touchCount == 0) // jeśli brak dotknięcia to koniec 
@@ -42,15 +56,7 @@ public class SelectManager : MonoBehaviour
         if (Input.touchCount == 2) // jeśl dotkniemy dwoma palcami 
         {
 
-            if (Selections.Count > 0) // i jest cokolwiek w liście 
-            {
-                foreach (var sel in Selections)
-                {
-                    if (sel != null)
-                        sel.Dselect(); // to odznacz 
-                }
-                Selections.Clear(); // i wyczyść listę
-            }
+			dselectAll ();
             return;
         }
         if (Input.touchCount != 0)
@@ -112,9 +118,12 @@ public class SelectManager : MonoBehaviour
                     }
                     else
                     {
-          
+         
                         if (hit.transform.GetComponent<ShowUnitInfo>().photonView.isMine) // jeśli obiekt należy do gracza
                         {
+							if (Selections.Any (x => x is BuildingInteractive)) {
+								dselectAll ();
+							}
                             Selections.Add(interact); // w innym wypadku dodaj do listy zaznaczonych
                             interact.Select(); // zaznacz
                         }
@@ -122,8 +131,9 @@ public class SelectManager : MonoBehaviour
 
                 }else
                 {
-                    Selections.Clear();
+					dselectAll ();
                     Selections.Add(buildingInteract);
+					buildingInteract.Select ();
                 }
 
 
@@ -147,12 +157,8 @@ public class SelectManager : MonoBehaviour
 
             if (Selections.Count > 0) // jeśli cokolwiek jest w liście zaznaczonych
             {
-                foreach (var sel in Selections)
-                {
-                    if (sel != null)
-                        sel.Dselect(); // to odznacz 
-                }
-                Selections.Clear(); // i wyczyść 
+				dselectAll ();
+		
             }
 
 

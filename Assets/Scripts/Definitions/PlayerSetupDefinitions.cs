@@ -13,7 +13,7 @@ public class PlayerSetupDefinitions {
 
     public List<GameObject> startingUnits = new List<GameObject>();
 
-    public float Credits;
+    public int Credits;
 
 
 	

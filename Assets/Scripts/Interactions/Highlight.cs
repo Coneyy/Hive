@@ -9,11 +9,14 @@ public class Highlight : Interaction
 
     public override void Dselect()
     {
+		Debug.Log("DSELECT");
         DisplayItem.SetActive(false);         // wyłączenie
     }
 
     public override void Select()
     {
+		Debug.Log("SELECT");
+
         DisplayItem.SetActive(true);  // włączenie
     }
 

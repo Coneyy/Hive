@@ -4,16 +4,22 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.Scripts.Buildings
-{
+
     public class BuildingManager : MonoBehaviour
     {
-        public GameObject Building;
 
-        //do zmergowania z systemem zasobów
-        private int gold = 100;
+	public void Update()
+	{
 
-        private IBuilding _building
+		if (Player.DefaultPlayer!= null) {
+			gold = Player.DefaultPlayer.Credits;
+		}
+	}
+
+	public GameObject Building;
+	int gold = 0;
+
+	private IBuilding _building
         {
             get { return Building.GetComponent<IBuilding>(); }
         }
@@ -35,6 +41,7 @@ namespace Assets.Scripts.Buildings
 
         public void RepairBuilding()
         {
+
             if (gold >= _building.FullRepairCost)
             {
                 gold -= _building.FullRepairCost;
@@ -68,4 +75,4 @@ namespace Assets.Scripts.Buildings
 
         }
     }
-}
+

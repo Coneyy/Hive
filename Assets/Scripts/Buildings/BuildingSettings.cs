@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets.Scripts.Buildings
-{
+
     public static class BuildingSettings
     {
         public static int StartingLevel = 1;
@@ -14,4 +13,4 @@ namespace Assets.Scripts.Buildings
         public static int UpgradeCost = 500;
         public static int RepairCost = 10;
     }
-}
+

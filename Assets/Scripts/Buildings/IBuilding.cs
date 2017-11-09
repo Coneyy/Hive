@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.Scripts.Buildings
-{
+
     public interface IBuilding
     {
         GameObject[] Extensions { get; set; }
@@ -26,4 +25,4 @@ namespace Assets.Scripts.Buildings
         void Repair(int percentage);
 
     }
-}
+

@@ -39,7 +39,7 @@ public class PlayerManager : IPlayerManager
     
     public PlayerManager()
     {
-        _playerService = new PlayerService();
+        _playerService = new FakePlayerService();
         _sessionService = new SessionService();
     }
 
