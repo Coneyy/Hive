@@ -5,11 +5,11 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure
 {
     public abstract class IPlayerManager : MonoBehaviour
     {
-        public event SignedIn PlayerSignedIn;
-        public event SignedUp PlayerSignedUp;
+        public event LoggedIn PlayerLoggedIn;
+        public event Registered PlayerRegistered;
 
-        public delegate void SignedIn();
-        public delegate void SignedUp();
+        public delegate void LoggedIn();
+        public delegate void Registered();
 
         protected ISessionService _sessionService {get; set;}
 
