@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HiveAPI.Models;
+using HiveAPI.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,17 +13,11 @@ namespace HiveAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        private readonly UserContext _context;
+        private readonly HiveApiContext _context;
 
-        public UserController(UserContext context)
-        {
+        public UserController(HiveApiContext context)
+        {         
             _context = context;
-
-            if (_context.Users.Count() == 0)
-            {
-                _context.Users.Add(new User("ExampleUser", "example@example.com", "1234"));
-                _context.SaveChanges();
-            }
         }
 
         [HttpGet]
