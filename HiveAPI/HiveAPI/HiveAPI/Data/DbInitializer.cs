@@ -1,5 +1,6 @@
 ﻿
 using HiveAPI.Models;
+using HiveAPI.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,14 @@ namespace HiveAPI.Data
                 return;
             }
 
-            var user1 = new User("example", "example@example.com", "1234");
-            var user2 = new User("Coney", "coney@o2.pl", "1234");
-            var user3 = new User("Eumajos", "eumajos@gmail.com", "1234");
-            var user4 = new User("Milson", "milson@gmail.com", "1234");
-            var user5 = new User("Lichoton", "lichoton@o2.pl", "1234");
-            var user6 = new User("Kuzniecow", "kuz@cnn.com", "1234");
-            var user7 = new User("Major", "major@op.com", "1234");
-            var user8 = new User("Matusio", "matus@onet.pl", "1234");
+            var user1 = new User("example", "example@example.com", PasswordHasher.CalculateHash("1234"));
+            var user2 = new User("Coney", "coney@o2.pl", PasswordHasher.CalculateHash("1234"));
+            var user3 = new User("Eumajos", "eumajos@gmail.com", PasswordHasher.CalculateHash("1234"));
+            var user4 = new User("Milson", "milson@gmail.com", PasswordHasher.CalculateHash("1234"));
+            var user5 = new User("Lichoton", "lichoton@o2.pl", PasswordHasher.CalculateHash("1234"));
+            var user6 = new User("Kuzniecow", "kuz@cnn.com", PasswordHasher.CalculateHash("1234"));
+            var user7 = new User("Major", "major@op.com", PasswordHasher.CalculateHash("1234"));
+            var user8 = new User("Matusio", "matus@onet.pl", PasswordHasher.CalculateHash("1234"));
 
             var users = new User[]
             {

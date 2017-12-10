@@ -11,6 +11,9 @@ using Microsoft.Extensions.Logging;
 using HiveAPI.Models;
 using System.IO;
 using HiveAPI.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace HiveAPI
 {
@@ -29,10 +32,26 @@ namespace HiveAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=Hive.Players;Trusted_Connection=True;";
             services.AddMvc();
-            //services.AddDbContext<HiveApiContext>(opt => opt.UseInMemoryDatabase());
-            services.AddDbContext<HiveApiContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));            
+            services.AddOptions();
+            services.Configure<AppSettings>(Configuration);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                     {
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+                            ValidIssuer = "hivegameapi.azurewebsites.net",
+                            ValidAudience = "hivegameapi.azurewebsites.net",
+                            IssuerSigningKey = new SymmetricSecurityKey(
+                                Encoding.UTF8.GetBytes(Configuration["SecurityKey"]))
+                        };
+                    });
+            services.AddDbContext<HiveApiContext>(opt => opt.UseInMemoryDatabase());
+            //services.AddDbContext<HiveApiContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }
 
@@ -41,6 +60,8 @@ namespace HiveAPI
         public void Configure(IApplicationBuilder app,
                               IHostingEnvironment env)
         {
+            app.UseAuthentication();
+            app.UseDeveloperExceptionPage();
             app.UseMvc();
         }
     }

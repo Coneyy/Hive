@@ -26,7 +26,7 @@ namespace HiveAPI.Models
         public string Username { get; set; }
         [Required, MaxLength(80)]
         public string Email { get; set; }
-        [Required, MaxLength(80)]
+        [Required, MaxLength(180)]
         public string Password { get; set; }
     }
 }
