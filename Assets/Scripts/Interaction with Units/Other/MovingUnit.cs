@@ -39,7 +39,7 @@ public class MovingUnit : MonoBehaviour {
 
         if (!isActive) return;
 
-        if (RtsManager.Current.isClose(target, transform.position, 50)) // jeśli agent jest aktywny i jest już w pobliżu celu
+        if (MainScreenUtils.isClose(target, transform.position, 50)) // jeśli agent jest aktywny i jest już w pobliżu celu
         {
             agent.Stop(); // to pozwól mu zakończyć 
             isActive = false; // agent przestaje działać

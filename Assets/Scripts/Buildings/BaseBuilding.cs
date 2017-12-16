@@ -170,7 +170,7 @@ public class BaseBuilding : BuildingInteractive, IBuilding
 
     public void SpawnUnit()
     {
-        networkManager.SpawnNewUnit(UnitSpawnPosition);
+		networkManager.SpawnNewUnit(UnitSpawnPosition,"name",ShowUnitInfo.TYPE.WARRIORANT);
     }
 
     public bool Upgrade()

@@ -20,8 +20,9 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure.Models
             Email = email;
             Password = password;
         }
+	
 
-        public HivePlayer(string emailOrUsername, string password)
+		public HivePlayer(string emailOrUsername, string password)
         {
             if (emailOrUsername.Contains("@"))
             {

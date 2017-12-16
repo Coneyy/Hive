@@ -21,8 +21,7 @@ public class PlayerManager : IPlayerManager
 
     public void Start()
     {
-        registerNotifier = GameObject.FindGameObjectWithTag("RegisterNotifier").GetComponent<Text>();        
-        loginNotifier = GameObject.FindGameObjectWithTag("LoginNotifier").GetComponent<Text>();
+     
     }
 
     private void OnEnable()

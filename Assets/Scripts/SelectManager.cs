@@ -131,9 +131,12 @@ public class SelectManager : MonoBehaviour
 
                 }else
                 {
-					dselectAll ();
-                    Selections.Add(buildingInteract);
-					buildingInteract.Select ();
+					if (buildingInteract.GetComponent<ShowUnitInfo> ().photonView.isMine) {
+						dselectAll ();
+						Selections.Add(buildingInteract);
+						buildingInteract.Select ();
+					}
+
                 }
 
 
@@ -143,13 +146,13 @@ public class SelectManager : MonoBehaviour
             if (Input.GetTouch(0).phase == TouchPhase.Began) // jeśli faza rozpoczęcia 
             {
                 beginTouched = Input.GetTouch(0).position; // zapisujemy miejsce w którym rozpoczęliśmy dotyk 
-                begin = RtsManager.Current.ScreenPointToMapPosition(Input.GetTouch(0).position); // rzucamy promień w to miejsce
+                begin = MainScreenUtils.ScreenPointToMapPosition(Input.GetTouch(0).position); // rzucamy promień w to miejsce
 
             }
 
-            now = RtsManager.Current.ScreenPointToMapPosition(Input.GetTouch(0).position); // promień na miejsce, które dotykamy obecnie
+            now = MainScreenUtils.ScreenPointToMapPosition(Input.GetTouch(0).position); // promień na miejsce, które dotykamy obecnie
 
-            if (!(RtsManager.Current.isNotCloseTo(beginTouched, Input.GetTouch(0).position, change))) // czy wyszliśmy poza zakres i można rozpocząć zaznaczanie wielu jednostek
+            if (!(MainScreenUtils.isNotCloseTo(beginTouched, Input.GetTouch(0).position, change))) // czy wyszliśmy poza zakres i można rozpocząć zaznaczanie wielu jednostek
                 return; // jeśli nie to zakończ 
 
 
@@ -201,7 +204,7 @@ public class SelectManager : MonoBehaviour
                 var interact = l.gameObject.transform.GetComponent<Interactive>(); // rzutuj element kolizji na interactive 
                 if (interact == null) //jeśli nie jest interaktywny 
                     continue; // to przejdź do kolejnego elementu listy 
-                if (l.gameObject.transform.GetComponent<PhotonView>().isMine)
+				if (l.gameObject.transform.GetComponent<PhotonView>().isMine && l.gameObject.GetComponent<BuildingInteractive>()==null)
                 {
                     Selections.Add(interact); // w innym przypadku dodaj do listy zaznaczonych 
                     interact.Select(); // i zaznacz

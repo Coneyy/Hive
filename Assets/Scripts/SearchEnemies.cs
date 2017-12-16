@@ -28,6 +28,8 @@ public class SearchEnemies : MonoBehaviour
 
                             {
 
+                       
+
                                 RtsManager.Current.enemies.Add(go);
                                 go.SetActive(false);
                             }

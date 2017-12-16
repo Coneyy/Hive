@@ -1,20 +1,13 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
+﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Network\NetworkManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\FogOfWar\FogOfWar.cs">
     <Files>
-      <File FileName="Assets\Scripts\Buildings\BaseBuilding.cs" Line="5" Column="36" />
-      <File FileName="Assets\Scripts\Network\NetworkManager.cs" Line="15" Column="39" />
-      <File FileName="Assets\Scripts\Buildings\BuildingManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\RtsManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GUI\Login\LoginClick.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Network\NetworkPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Network\PlayerManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GUI\CodeGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GUI\UnitInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GUI\InitScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SelectManager.cs" Line="161" Column="3" />
-      <File FileName="Assets\Scripts\Interactions\Highlight.cs" Line="18" Column="14" />
+      <File FileName="Assets\Scripts\Network\NetworkManager.cs" Line="8" Column="2" />
+      <File FileName="Assets\Scripts\Network\PlayerManager.cs" Line="23" Column="6" />
+      <File FileName="Assets\Scripts\GUI\ScreenGUI.cs" Line="51" Column="46" />
+      <File FileName="Assets\Scripts\AndroidConnection\AndroidIntentReader.cs" Line="44" Column="3" />
+      <File FileName="Assets\Scripts\Network\PlayerInfrastructure\Models\HivePlayer.cs" Line="23" Column="2" />
+      <File FileName="Assets\Scripts\FogOfWar\FogOfWar.cs" Line="58" Column="46" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

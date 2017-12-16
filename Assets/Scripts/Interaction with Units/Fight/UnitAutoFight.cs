@@ -35,7 +35,10 @@ public class UnitAutoFight : MonoBehaviour
 
         foreach (Interactive i in enemies)
         {
-            if (RtsManager.Current.isClose(i.transform.position, transform.position, GetComponent<ShowUnitInfo>().sight))
+			if (i == null)
+				continue;
+
+            if (MainScreenUtils.isClose(i.transform.position, transform.position, GetComponent<ShowUnitInfo>().sight))
                 continue;
             else
             {
@@ -92,7 +95,7 @@ public class UnitAutoFight : MonoBehaviour
         }
         if (enemy != null)
         {
-            if (!RtsManager.Current.isClose(enemy.transform.position, transform.position, 50)) // JEŚLI SĄ W ZASIĘGU WYSZUKIWANIA, LECZ DALEJ NIŻ 50 JEDNOSTEK
+            if (!MainScreenUtils.isClose(enemy.transform.position, transform.position, 50)) // JEŚLI SĄ W ZASIĘGU WYSZUKIWANIA, LECZ DALEJ NIŻ 50 JEDNOSTEK
             {
                 movingUnit.sendToTarget(enemy.transform.position); Debug.Log("WYSYŁAM DO WALKI!"); // TO WYŚLIJ DO WALKI 
             }
@@ -112,4 +115,9 @@ public class UnitAutoFight : MonoBehaviour
 
 
     }
+
+	public void removeEnemy (Interactive enemy)
+	{
+		enemies.Remove (enemy);
+	}
 }

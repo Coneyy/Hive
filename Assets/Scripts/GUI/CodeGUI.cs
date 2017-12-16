@@ -47,7 +47,7 @@ public class CodeGUI : MonoBehaviour
         manager = GameObject.Find("Manager");
         SManager = manager.GetComponent<SelectManager>();
         RectTransform objectRectTransform = Panel.GetComponent<RectTransform>();
-        panelHeight = RtsManager.Current.scaleToResolution(objectRectTransform.rect.height);
+        panelHeight = MainScreenUtils.scaleToResolution(objectRectTransform.rect.height);
         float y = bottomBar.transform.position.y - Screen.height + panelHeight;
 
         HiddenBottomBar = 0;

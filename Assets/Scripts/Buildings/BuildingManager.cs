@@ -8,16 +8,8 @@ using UnityEngine;
     public class BuildingManager : MonoBehaviour
     {
 
-	public void Update()
-	{
-
-		if (Player.DefaultPlayer!= null) {
-			gold = Player.DefaultPlayer.Credits;
-		}
-	}
 
 	public GameObject Building;
-	int gold = 0;
 
 	private IBuilding _building
         {
@@ -26,7 +18,7 @@ using UnityEngine;
 
         public void UpgradeBuilding()
         {
-            if (_building.UpgradeCost > gold)
+		if (_building.UpgradeCost > RtsManager.Current.getCredits())
             {
                 throw new BuildingException("Zbyt mało zasobów na ulepszenie");
             }
@@ -36,36 +28,36 @@ using UnityEngine;
                 throw new BuildingException("Poziom budynku jest maksymalny");
             }
 
-            gold -= _building.UpgradeCost;
+		RtsManager.Current.setCredits(RtsManager.Current.getCredits()-_building.UpgradeCost);
         }
 
         public void RepairBuilding()
         {
 
-            if (gold >= _building.FullRepairCost)
+		if (RtsManager.Current.getCredits() >= _building.FullRepairCost)
             {
-                gold -= _building.FullRepairCost;
-                _building.Repair(100);                
+			RtsManager.Current.setCredits(RtsManager.Current.getCredits()-_building.FullRepairCost);
+			_building.Repair(100);                
             }
             else
             {
-                var repairPercentage = gold / _building.RepairCostPerHp;
-                var repairValue = repairPercentage * _building.RepairCostPerHp;
-                gold -= repairValue;
-                _building.Repair(repairPercentage);
+			var repairPercentage = RtsManager.Current.getCredits() / _building.RepairCostPerHp;
+               var repairValue = repairPercentage * _building.RepairCostPerHp;
+			RtsManager.Current.setCredits(RtsManager.Current.getCredits()-repairValue);
+			_building.Repair(repairPercentage);
             }
         }
 
         public void SpawnUnit()
         {
-            if (_building.UnitCost > gold)
+		if (_building.UnitCost > RtsManager.Current.getCredits())
             {
                 throw new BuildingException("Zbyt mało zasobów na stworzenie jednostki");
             }
 
             _building.SpawnUnit();
-            gold -= _building.UnitCost;
-        }
+		RtsManager.Current.setCredits(RtsManager.Current.getCredits()-_building.UnitCost);
+	   }
     }
 
     public class BuildingException : Exception

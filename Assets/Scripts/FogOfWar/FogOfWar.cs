@@ -59,21 +59,23 @@ public class FogOfWar : MonoBehaviour
     }
     private void UpdateShadowMap()
     {
+		
         foreach (var revealer in _revealers)
         {
             //DO ZASTANOWIENIA SIE NAD OPTYMALIZACJA RYSOWANIA ODKRYWANIA
             // if (revealer.transform.hasChanged)
             // {
             if (revealer.GetComponent<BuildingInteractive>() == null)
-                DrawFilledMidpointCircleSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
+				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
             else
             {
-                DrawFilledMidpointCircleSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
+				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
 
             }
             //    revealer.transform.hasChanged = false;
             // }
         }
+        
     }
     public void drawBuildingCircle(int centerX, int centerY, int radius)
     {
@@ -260,8 +262,7 @@ public class FogOfWar : MonoBehaviour
 
                 float distance = Vector3.Distance(g.transform.position, t.transform.position); // liczymy dystans pomiędzy "odkrywaczem" a obiektem
 
-                if (distance > g.GetComponent<ShowUnitInfo>().sight + 50) ; // jeśli dystans jest większy niż jego wzrok + 50 jednostek 
-                else
+				if (!(distance > g.GetComponent<ShowUnitInfo>().sight + 50)) // jeśli dystans jest większy niż jego wzrok + 50 jednostek 
                 {
                     if (distance < distances[iterator]) // jeśli dystans jest mniejszy niż najmniejszy dystans "odkrywacza" a obiektu
                     {

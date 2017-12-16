@@ -15,31 +15,9 @@ public class Fight : MonoBehaviour {
 
     // Walka
     private float attackBuffer; //buffer do wyliczania kiedy zaatakować 
-
-
+	private FightInteraction fightInteraction; // funkcje PUN z Photona
   
 
-
-
-
-
-
-    [PunRPC]
-    bool subtractHealth(float value)
-    {
-        if (!GetComponent<ShowUnitInfo>().photonView.isMine) return false; // jak nie jest to nasza jednostka, to wyłącz skrypt
-        GetComponent<ShowUnitInfo>().currentHealth = GetComponent<ShowUnitInfo>().currentHealth - value;
-
-        if (GetComponent<ShowUnitInfo>().currentHealth <= 0)
-        {
-            GetComponent<ShowUnitInfo>().Dselect();
-            fog.removeRevealer(gameObject);
-            PhotonNetwork.Destroy(gameObject);
-            return true;
-        }
-        return false;
-
-    }
 
     public void startFight(Interactive enemy, bool automatic)
     {
@@ -75,7 +53,7 @@ public class Fight : MonoBehaviour {
             }
 
 
-            if (!RtsManager.Current.isClose(enemy.transform.position, transform.position, 50))
+            if (!MainScreenUtils.isClose(enemy.transform.position, transform.position, 50))
             {
 
                 movingUnit.sendToTarget(enemy.transform.position);
@@ -95,7 +73,8 @@ public class Fight : MonoBehaviour {
             attackBuffer += Time.deltaTime; // zwiększamy buffer ataku
             if (GetComponent<ShowUnitInfo>().attackDuration < attackBuffer) // jeśli buffer jest większy od częstotliwości ataku
             {
-                enemy.GetComponent<ShowUnitInfo>().photonView.RPC("subtractHealth", PhotonTargets.All, GetComponent<ShowUnitInfo>().attack);
+				enemy.GetComponent<ShowUnitInfo>().photonView.RPC("subtractHealth", PhotonTargets.All, GetComponent<ShowUnitInfo>().attack);
+
 
                 attackBuffer = 0; // resetuj buffer 
 
@@ -114,7 +93,8 @@ public class Fight : MonoBehaviour {
 
         GameObject Manager = GameObject.Find("Manager");
         fog = Manager.GetComponent<FogOfWar>();
-
+		fightInteraction = GetComponent<FightInteraction> ();
+		FightInteraction.OnBeforeObjectDestroying += RemoveRevealer;
     }
 
     // Update is called once per frame
@@ -132,4 +112,8 @@ public class Fight : MonoBehaviour {
         fight();
 
     }
+
+	private void RemoveRevealer(GameObject gameObject){
+		fog.removeRevealer (gameObject);		
+	}
 }
