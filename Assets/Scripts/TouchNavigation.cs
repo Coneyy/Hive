@@ -28,6 +28,11 @@ public class TouchNavigation : Interaction
     private bool bottomMenuBlock = false; // czy dolne menu blokuje kawałek swiata gry
 
     
+	public void stopAgent()
+	{
+		agent.Stop(); // to pozwól mu zakończyć 
+		isActive = false; // agent przestaje działać
+	}
 
     public override void Dselect()
     {

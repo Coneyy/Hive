@@ -25,6 +25,8 @@ public class FogOfWar : MonoBehaviour
     public float darkColor;
     public int fogOffset;
 
+	private int frameCounter=0;
+
 
     public void addRevealer(GameObject revealer)
     {
@@ -62,9 +64,7 @@ public class FogOfWar : MonoBehaviour
 		
         foreach (var revealer in _revealers)
         {
-            //DO ZASTANOWIENIA SIE NAD OPTYMALIZACJA RYSOWANIA ODKRYWANIA
-            // if (revealer.transform.hasChanged)
-            // {
+          
             if (revealer.GetComponent<BuildingInteractive>() == null)
 				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
             else
@@ -72,8 +72,7 @@ public class FogOfWar : MonoBehaviour
 				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
 
             }
-            //    revealer.transform.hasChanged = false;
-            // }
+  
         }
         
     }
@@ -242,7 +241,12 @@ public class FogOfWar : MonoBehaviour
     }
     private void Update()
     {
-
+		if (frameCounter < 1) {
+			frameCounter++;
+			return;
+		}
+		frameCounter = 0;
+			
 
         _shadowMap.SetPixels32(_pixels); // malujemy mapę na "szaro"
         UpdateShadowMap(); // odkrywamy część mapy

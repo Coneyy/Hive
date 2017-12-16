@@ -41,9 +41,13 @@ public class MovingUnit : MonoBehaviour {
 
         if (MainScreenUtils.isClose(target, transform.position, 50)) // jeśli agent jest aktywny i jest już w pobliżu celu
         {
-            agent.Stop(); // to pozwól mu zakończyć 
-            isActive = false; // agent przestaje działać
+			stopMoving ();
         }
 
     }
+	public void stopMoving()
+	{
+		agent.Stop(); // to pozwól mu zakończyć 
+		isActive = false; // agent przestaje działać
+	}
 }

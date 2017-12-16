@@ -44,18 +44,18 @@ public class AndroidIntentReader : MonoBehaviour {
 		
 			startGame(username,email);
 		}
+		else 
+		{
+		startTestGame();
+		}
 
 
 
 #endif
 
 		#if UNITY_ANDROID && UNITY_EDITOR
-
-
-		string name="test";
-		string email = "test@o2.pl";
-
-		startGame (name, email);
+	
+		startTestGame();
 
 		#endif
 
@@ -63,4 +63,11 @@ public class AndroidIntentReader : MonoBehaviour {
     }
 
 
+	void startTestGame ()
+	{
+		string name="test";
+		string email = "test@o2.pl";
+
+		startGame (name, email);
+	}
 }

@@ -23,12 +23,17 @@ public class Fight : MonoBehaviour {
     {
         if(isFighting)
         {
-            if(this.automatic && !automatic)
-            {
-                Debug.Log("WYŁĄCZAM AUTOMATYCZNY ATAK I USTAWIAM MANALNY!");
-                this.enemy = enemy;
-            }
+			if (!automatic) {
 
+				if (this.automatic) {
+					Debug.Log ("WYŁĄCZAM AUTOMATYCZNY ATAK I USTAWIAM MANALNY!");
+				} else {
+					Debug.Log ("NOWY CEL!");
+				}
+				this.enemy = enemy;
+
+			}
+				
         }
         else
         {
@@ -36,11 +41,18 @@ public class Fight : MonoBehaviour {
             this.enemy = enemy;
             this.automatic = automatic;
         }
+		stopMoving ();
 
        
        
     }
 
+	void stopMoving ()
+	{
+		movingUnit.stopMoving ();
+		GetComponent<TouchNavigation> ().stopAgent ();
+
+	}
 
     private void fight()
     {
