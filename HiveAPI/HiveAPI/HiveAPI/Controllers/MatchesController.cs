@@ -14,7 +14,7 @@ namespace HiveAPI.Controllers
     [Produces("application/json")]
     [Route("api/Matches")]
 
-    [Authorize]
+    
     public class MatchesController : Controller
     {
         private readonly HiveApiContext _context;
@@ -34,6 +34,7 @@ namespace HiveAPI.Controllers
                 .ToListAsync();
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMatch([FromRoute] Guid id)
         {
@@ -51,15 +52,11 @@ namespace HiveAPI.Controllers
 
             return Ok(new MatchDto(match));
         }
-        
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutMatch([FromRoute] Guid id, [FromBody] Match match)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] Match match)
+        {
             if (id != match.Id)
             {
                 return BadRequest();
@@ -87,27 +84,21 @@ namespace HiveAPI.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> PostMatch([FromBody] Match match)
+        public async Task<IActionResult> Create([FromBody] Match match)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            match.Player1 = await _context.Users.SingleOrDefaultAsync(u => u.Email.Equals(match.Player1.Email));
+            match.Player2 = await _context.Users.SingleOrDefaultAsync(u => u.Email.Equals(match.Player2.Email));
 
             _context.Matches.Add(match);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetMatch", new { id = match.Id }, new MatchDto(match));
         }
-        
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMatch([FromRoute] Guid id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
             var match = await _context.Matches.SingleOrDefaultAsync(m => m.Id == id);
             if (match == null)
             {
@@ -120,14 +111,18 @@ namespace HiveAPI.Controllers
             return Ok(match);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("history/{userId}")]
         public async Task<IActionResult> GetMatchHistory([FromRoute] Guid userId)
         {
-            if (!ModelState.IsValid)
+
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Id.Equals(userId));
+            if (user == null)
             {
-                return BadRequest(ModelState);
+                return NotFound("Użytkownik o podanym Id nie istnieje");
             }
+
 
             var matches =  await _context.Matches.Where(m => m.Player1.Id.Equals(userId) || m.Player2.Id.Equals(userId))
                                                   .OrderBy(m => m.Date)
@@ -137,19 +132,21 @@ namespace HiveAPI.Controllers
                                                   .ToListAsync();
             if (matches == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return Ok(matches);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("points/{userId}")]
         public async Task<IActionResult> GetPlayerPoints([FromRoute] Guid userId)
         {
-            if (!ModelState.IsValid)
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Id.Equals(userId));
+            if (user == null)
             {
-                return BadRequest(ModelState);
+                return NotFound("Użytkownik o podanym Id nie istnieje");
             }
 
             var matches = await _context.Matches.Where(m => m.Player1.Id.Equals(userId) || m.Player2.Id.Equals(userId))
@@ -157,13 +154,11 @@ namespace HiveAPI.Controllers
                                                   .Include(m => m.Player1)
                                                   .Include(m => m.Player2)
                                                   .ToListAsync();
-
+            long points = 0;
             if (matches == null)
             {
-                return NotFound();
-            }
-
-            long points = 0;
+                return Ok(points);
+            }            
 
             foreach (var match in matches)
             {

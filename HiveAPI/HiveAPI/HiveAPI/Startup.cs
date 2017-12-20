@@ -50,8 +50,8 @@ namespace HiveAPI
                                 Encoding.UTF8.GetBytes(Configuration["SecurityKey"]))
                         };
                     });
-            services.AddDbContext<HiveApiContext>(opt => opt.UseInMemoryDatabase());
-            //services.AddDbContext<HiveApiContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<HiveApiContext>(opt => opt.UseInMemoryDatabase());
+            services.AddDbContext<HiveApiContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }
 

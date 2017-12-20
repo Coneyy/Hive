@@ -23,7 +23,7 @@ namespace HiveAPI.Security
                 issuer: "hivegameapi.azurewebsites.net",
                 audience: "hivegameapi.azurewebsites.net",
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(60),
+                expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: creds);
 
             return token;

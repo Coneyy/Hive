@@ -30,9 +30,9 @@ namespace HiveAPI.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Select(u => new UserDto(u)).ToListAsync();
         }
 
         [HttpGet("{id}", Name = "GetUser")]

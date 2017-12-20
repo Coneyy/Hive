@@ -27,6 +27,7 @@ namespace HiveAPI.Data
             var user6 = new User("Kuzniecow", "kuz@cnn.com", PasswordHasher.CalculateHash("1234"));
             var user7 = new User("Major", "major@op.com", PasswordHasher.CalculateHash("1234"));
             var user8 = new User("Matusio", "matus@onet.pl", PasswordHasher.CalculateHash("1234"));
+            var user9 = new User("test", "test@o2.pl", PasswordHasher.CalculateHash("1234"));
 
             var users = new User[]
             {
@@ -37,7 +38,8 @@ namespace HiveAPI.Data
                 user5,
                 user6,
                 user7,
-                user8
+                user8,
+                user9
             };
 
             foreach (var user in users)
