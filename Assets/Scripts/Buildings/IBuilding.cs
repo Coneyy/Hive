@@ -5,24 +5,25 @@ using System.Text;
 using UnityEngine;
 
 
-    public interface IBuilding
-    {
-        GameObject[] Extensions { get; set; }
-        GameObject Base { get; set; }
+public interface IBuilding
+{
+    GameObject[] Extensions { get; set; }
+    GameObject Base { get; set; }
 
-        int Level { get; set; }
-        int MaxLevel { get; }
-        int Health { get; set; }
-        int MaxHealth { get; set; }
-        int UnitCost { get; set; }
-        int RepairCostPerHp { get; set; }
-        int FullRepairCost { get; }
-        int UpgradeCost { get; set; }
+    int Level { get; set; }
+    int MaxLevel { get; }
+    int Health { get; set; }
+    int MaxHealth { get; set; }
+    int UnitCost { get; set; }
+    int RepairCostPerHp { get; set; }
+    int FullRepairCost { get; }
+    int UpgradeCost { get; set; }
 
 
-        bool Upgrade();
-        void SpawnUnit();
-        void Repair(int percentage);
+    bool Upgrade();
+    void SpawnUnit();
+    void Repair(int percentage);
+    void BuildingDestroyed();
 
-    }
+}
 

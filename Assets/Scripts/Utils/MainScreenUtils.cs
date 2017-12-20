@@ -20,7 +20,7 @@ public class MainScreenUtils: MonoBehaviour
     {
         var ray = Camera.main.ScreenPointToRay(point);
         RaycastHit hit;
-        if (!RtsManager.Current.MapCollider.Raycast(ray, out hit, Mathf.Infinity))
+        if (!RtsManager.Credits.MapCollider.Raycast(ray, out hit, Mathf.Infinity))
             return Vector3.zero;
 
 

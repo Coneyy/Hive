@@ -16,7 +16,7 @@ public class ShowUnitInfo : Interaction
 
 
     public Sprite pic;
-    public enum TYPE { ANT = 100, SPIDER = 1000, WARRIORANT = 500, MOTHERBASE = 2000 };
+    public enum TYPE { ANT = 100, SPIDER = 1000, WARRIORANT = 500, MOTHERBASE = 50 };
     enum ATTACK { ANT = 20, SPIDER = 500, WARRIORANT = 30, MOTHERBASE=0 };
     enum DURATION { ANT = 4, SPIDER = 7, WARRIORANT = 3, MOTHERBASE=0};
     enum SIGHT { ANT = 100, SPIDER = 5, WARRIORANT = 100, MOTHERBASE=150};

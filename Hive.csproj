@@ -7,17 +7,19 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0797786F-CF2F-B829-E93B-FB9661992633}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp.dll</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.6.3f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -175,6 +177,7 @@
     <Compile Include="Assets\PhotonChatApi\IChatClientListener.cs" />
     <Compile Include="Assets\PhotonCreateControl.cs" />
     <Compile Include="Assets\Scripts\AndroidConnection\AndroidIntentReader.cs" />
+    <Compile Include="Assets\Scripts\BuildingInteractions\BuildingGuiConnector.cs" />
     <Compile Include="Assets\Scripts\BuildingInteractions\BuildingInteractive.cs" />
     <Compile Include="Assets\Scripts\Buildings\BaseBuilding.cs" />
     <Compile Include="Assets\Scripts\Buildings\BuildingManager.cs" />
@@ -188,6 +191,8 @@
     <Compile Include="Assets\Scripts\GUI\InitScript.cs" />
     <Compile Include="Assets\Scripts\GUI\Login\LoginClick.cs" />
     <Compile Include="Assets\Scripts\GUI\Login\RegisterClick.cs" />
+    <Compile Include="Assets\Scripts\GUI\ScreenGUI.cs" />
+    <Compile Include="Assets\Scripts\Interaction with Units\Fight\BuildingFight.cs" />
     <Compile Include="Assets\Scripts\Interaction with Units\Fight\Fight.cs" />
     <Compile Include="Assets\Scripts\Interaction with Units\Fight\SendUnitToFight.cs" />
     <Compile Include="Assets\Scripts\Interaction with Units\Fight\UnitAutoFight.cs" />
@@ -199,12 +204,16 @@
     <Compile Include="Assets\Scripts\Interactive.cs" />
     <Compile Include="Assets\Scripts\Network\NetworkManager.cs" />
     <Compile Include="Assets\Scripts\Network\NetworkPlayer.cs" />
+    <Compile Include="Assets\Scripts\Network\PhotonInteractions\FightInteraction.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\ApiUrls.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\FakePlayerService.cs" />
+    <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IMatchService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IPlayerManager.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IPlayerService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\ISessionService.cs" />
+    <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\MatchService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\HivePlayer.cs" />
+    <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\Match.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\NotFoundException.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\Session.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\SessionSingleton.cs" />

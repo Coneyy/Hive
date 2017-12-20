@@ -1,20 +1,40 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 public class RtsManager : MonoBehaviour
 {
-
-
-
-    public static RtsManager Current = null;
-
-
+    public static RtsManager Credits = null;
+    
     public TerrainCollider MapCollider;
 
     public List<PlayerSetupDefinitions> Players = new List<PlayerSetupDefinitions>();
 
     public List<GameObject> enemies = new List<GameObject>();
 
+    public static int Gold 
+    {
+        get
+        {
+            return Player.DefaultPlayer.Credits;
+        }
+        set
+        {
+            Player.DefaultPlayer.Credits = value;
+            BottomPanelConnector.Current.setResourceValue(Credits.ToString());
+        }
+    }
+
+    public static int Points
+    {
+        get
+        {
+            var myObjects = GameObject.FindObjectsOfType(typeof(PhotonView))
+                                       .Where(o => ((PhotonView)o).isMine);
+
+            return myObjects.Count()*100 + Player.DefaultPlayer.Credits;
+        }
+    }
    
     public T[] _2Dto1D<T>(T[,] tab)
     {
@@ -36,27 +56,10 @@ public class RtsManager : MonoBehaviour
     {
         Player.DefaultPlayer = player;
         BottomPanelConnector.Current.setResourceValue(player.Credits.ToString());
-
     }
-
 
     void Start()
     {
-
-        Current = this;
-      
+        Credits = this;      
     }
-
-	public void setCredits(int credits)
-	{
-		Player.DefaultPlayer.Credits = credits;
-		BottomPanelConnector.Current.setResourceValue (credits.ToString());
-	}
-	public int getCredits()
-	{
-		return Player.DefaultPlayer.Credits;
-	}
-
-
-
 }

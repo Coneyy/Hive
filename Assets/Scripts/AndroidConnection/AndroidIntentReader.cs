@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Hive.Assets.Scripts.Network.PlayerInfrastructure.Models;
+using Hive.Assets.Scripts.Network.PlayerInfrastructure;
 
 public class AndroidIntentReader : MonoBehaviour {
 
+    SessionService sessionService = new SessionService();
 
 	public void startGame(string name,string email)
 	{
@@ -15,15 +17,16 @@ public class AndroidIntentReader : MonoBehaviour {
 		HivePlayer player = new HivePlayer ();
 		player.Username = name;
 		player.Email = email;
-		SessionSingleton.Session.Player = player;
+        sessionService.UpdateCurrentSession(player);
 		var manager=GetComponent<NetworkManager> ();
 
-		manager.Connect ();
+        Debug.Log("Session before connecting: " + SessionSingleton.Session.Player.Username);
+        manager.Connect ();
 	}
 
 
      void Start () {
-		
+
 
 #if UNITY_ANDROID && !UNITY_EDITOR
 
@@ -44,15 +47,22 @@ public class AndroidIntentReader : MonoBehaviour {
 		
 			startGame(username,email);
 		}
+        else
+        {
+            string name="example";
+		    string email = "example@example.com";
+
+		    startGame (name, email);
+        }
 
 
 
 #endif
 
-		#if UNITY_ANDROID && UNITY_EDITOR
+#if UNITY_ANDROID && UNITY_EDITOR
 
 
-		string name="test";
+        string name ="test";
 		string email = "test@o2.pl";
 
 		startGame (name, email);

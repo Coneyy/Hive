@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseBuilding : BuildingInteractive, IBuilding
 {
+    public static event Action Destroyed;
+
     public GameObject[] _extensions;
     public GameObject _base;
 
@@ -140,7 +143,7 @@ public class BaseBuilding : BuildingInteractive, IBuilding
     {
         get
         {
-            return (MaxHealth - Health) * RepairCostPerHp; 
+            return (MaxHealth - Health) * RepairCostPerHp;
         }
     }
 
@@ -170,7 +173,7 @@ public class BaseBuilding : BuildingInteractive, IBuilding
 
     public void SpawnUnit()
     {
-		networkManager.SpawnNewUnit(UnitSpawnPosition,"name",ShowUnitInfo.TYPE.WARRIORANT);
+        networkManager.SpawnNewUnit(UnitSpawnPosition, "name", ShowUnitInfo.TYPE.WARRIORANT);
     }
 
     public bool Upgrade()
@@ -184,5 +187,13 @@ public class BaseBuilding : BuildingInteractive, IBuilding
         MaxHealth += (int)(MaxHealth * 0.15);
         _extensions[level - 1].SetActive(true);
         return true;
+    }
+
+    public void BuildingDestroyed()
+    {
+        if (Destroyed != null)
+        {
+            Destroyed();
+        }
     }
 }

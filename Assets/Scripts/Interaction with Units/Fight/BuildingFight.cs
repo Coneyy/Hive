@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Hive.Assets.Scripts.Network.PlayerInfrastructure.Models;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,8 +16,9 @@ public class BuildingFight : MonoBehaviour {
 	public void EndGame(GameObject gameObject)
 	{
 		if (gameObject.GetComponent<BuildingInteractive> () != null && gameObject.GetComponent<ShowUnitInfo> ().photonView.isMine) {
-			Debug.Log ("Gra zakończona, przegrał: " + Player.DefaultPlayer.Name);
-		}
+			Debug.Log ("Gra zakończona, przegrał: " + SessionSingleton.Session.Player.Username);
+            gameObject.GetComponent<IBuilding>().BuildingDestroyed();
+        }
 	}
 	
 
