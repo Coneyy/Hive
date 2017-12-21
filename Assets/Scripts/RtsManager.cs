@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class RtsManager : MonoBehaviour
 {
-    public static RtsManager Credits = null;
+    public static RtsManager StrategyManager = null;
     
     public TerrainCollider MapCollider;
 
@@ -21,7 +21,7 @@ public class RtsManager : MonoBehaviour
         set
         {
             Player.DefaultPlayer.Credits = value;
-            BottomPanelConnector.Current.setResourceValue(Credits.ToString());
+            BottomPanelConnector.Current.setResourceValue(Gold.ToString());
         }
     }
 
@@ -60,6 +60,6 @@ public class RtsManager : MonoBehaviour
 
     void Start()
     {
-        Credits = this;      
+        StrategyManager = this;      
     }
 }

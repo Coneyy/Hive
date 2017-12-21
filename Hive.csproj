@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.6.3f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -203,24 +201,18 @@
     <Compile Include="Assets\Scripts\Interactions\ShowUnitInfo.cs" />
     <Compile Include="Assets\Scripts\Interactive.cs" />
     <Compile Include="Assets\Scripts\Network\NetworkManager.cs" />
-    <Compile Include="Assets\Scripts\Network\NetworkPlayer.cs" />
     <Compile Include="Assets\Scripts\Network\PhotonInteractions\FightInteraction.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\ApiUrls.cs" />
-    <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\FakePlayerService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IMatchService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IPlayerManager.cs" />
-    <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IPlayerService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\ISessionService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\MatchService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\HivePlayer.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\Match.cs" />
-    <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\NotFoundException.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\Session.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\SessionSingleton.cs" />
-    <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\PlayerService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\SessionService.cs" />
     <Compile Include="Assets\Scripts\Network\PlayerManager.cs" />
-    <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerMark.cs" />
     <Compile Include="Assets\Scripts\Rotation.cs" />

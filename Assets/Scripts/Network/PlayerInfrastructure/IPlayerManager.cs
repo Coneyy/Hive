@@ -7,10 +7,9 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure
     public abstract class IPlayerManager : MonoBehaviour
     {
         protected ISessionService _sessionService { get; set; }
-        protected IPlayerService _playerService { get; set; }
         protected IMatchService _matchService { get; set; }
 
-        public virtual void UploadMatch(int myPoints, int enemyPoints) { }
+        public virtual void UploadMatch(int myPoints, int enemyPoints) { } 
 
     }
 }

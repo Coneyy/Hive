@@ -27,20 +27,6 @@ public class CodeGUI : MonoBehaviour
     SelectManager SManager;
     GameObject LoggingMenu; //menu (canvas) z logowaniem i rejestracja
     
-
-    private void OnEnable()
-    {
-        //menu       
-        PlayerManager.PlayerLoggedIn += DisableLoggingMenu;
-        PlayerManager.PlayerRegistered += DisableLoggingMenu;
-    }
-    private void OnDisable()
-    {
-        //menu       
-        PlayerManager.PlayerLoggedIn -= DisableLoggingMenu;
-        PlayerManager.PlayerRegistered -= DisableLoggingMenu;
-    }
-
     void Start()
     {
         bottomBar = GameObject.Find("BottomBarController");
@@ -59,8 +45,6 @@ public class CodeGUI : MonoBehaviour
         startingPosition.y = y;
 
         bottomBar.transform.position = startingPosition;
-
-        LoggingMenu = GameObject.Find("LoginCanvas");
     }
 
     public void hideBottomBar()
@@ -158,10 +142,5 @@ public class CodeGUI : MonoBehaviour
             show();
         }
     }
-
-    private void DisableLoggingMenu()
-    {
-        LoggingMenu.SetActive(false);
-    }
-
+    
 }

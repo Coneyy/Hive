@@ -62,6 +62,7 @@ public class FogOfWar : MonoBehaviour
 		
         foreach (var revealer in _revealers)
         {
+            if (revealer == null) continue;
             //DO ZASTANOWIENIA SIE NAD OPTYMALIZACJA RYSOWANIA ODKRYWANIA
             // if (revealer.transform.hasChanged)
             // {

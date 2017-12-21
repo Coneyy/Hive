@@ -11,23 +11,8 @@ using Assets.Scripts.Network.PlayerInfrastructure;
 
 public class PlayerManager : IPlayerManager
 {
-    public static event LoggedIn PlayerLoggedIn;
-    public static event Registered PlayerRegistered;
-
-    public delegate void LoggedIn();
-    public delegate void Registered();
-    
-    private Text loginNotifier;
-    private Text registerNotifier;
-
-    public void Start()
-    {
-     
-    }
-    
     public PlayerManager()
     {
-        _playerService = new FakePlayerService();
         _sessionService = new SessionService();
         _matchService = new MatchService();
     }
@@ -43,7 +28,4 @@ public class PlayerManager : IPlayerManager
 
         _matchService.UploadMatchInfo(match);
     }
-    
-
-
 }

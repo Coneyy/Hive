@@ -1,0 +1,11 @@
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\bin\Release\netcoreapp2.0\HiveAPI.deps.json
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\bin\Release\netcoreapp2.0\HiveAPI.runtimeconfig.json
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\bin\Release\netcoreapp2.0\HiveAPI.runtimeconfig.dev.json
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\bin\Release\netcoreapp2.0\HiveAPI.dll
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\bin\Release\netcoreapp2.0\HiveAPI.pdb
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\obj\Release\netcoreapp2.0\HiveAPI.csprojResolveAssemblyReference.cache
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\obj\Release\netcoreapp2.0\HiveAPI.csproj.CoreCompileInputs.cache
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\obj\Release\netcoreapp2.0\HiveAPI.AssemblyInfoInputs.cache
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\obj\Release\netcoreapp2.0\HiveAPI.AssemblyInfo.cs
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\obj\Release\netcoreapp2.0\HiveAPI.dll
+D:\Roj\Hive\HiveAPI\HiveAPI\HiveAPI\obj\Release\netcoreapp2.0\HiveAPI.pdb

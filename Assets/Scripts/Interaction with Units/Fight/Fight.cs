@@ -75,7 +75,6 @@ public class Fight : MonoBehaviour {
             {
 				enemy.GetComponent<ShowUnitInfo>().photonView.RPC("subtractHealth", PhotonTargets.All, GetComponent<ShowUnitInfo>().attack);
 
-
                 attackBuffer = 0; // resetuj buffer 
 
             }

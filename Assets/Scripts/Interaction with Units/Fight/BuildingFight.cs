@@ -12,11 +12,13 @@ public class BuildingFight : MonoBehaviour {
 		FightInteraction.OnBeforeObjectDestroying += EndGame;
 	}
 
+    static bool isAlive = true;
 
 	public void EndGame(GameObject gameObject)
 	{
-		if (gameObject.GetComponent<BuildingInteractive> () != null && gameObject.GetComponent<ShowUnitInfo> ().photonView.isMine) {
-			Debug.Log ("Gra zakończona, przegrał: " + SessionSingleton.Session.Player.Username);
+		if (gameObject.GetComponent<BuildingInteractive> () != null && gameObject.GetComponent<ShowUnitInfo> ().photonView.isMine && isAlive) {
+            isAlive = false;
+            Debug.Log ("Gra zakończona, przegrał: " + SessionSingleton.Session.Player.Username);
             gameObject.GetComponent<IBuilding>().BuildingDestroyed();
         }
 	}

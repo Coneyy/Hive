@@ -15,9 +15,6 @@ public class NetworkManager : Photon.PunBehaviour
     public static event Action RoomJoined;
     public static event Action<string, string> PlayersNamesObtained;
     public static event Action<string> GameOver;
-    //public delegate void GameStart();
-    //public delegate void RoomJoin();
-    //public delegate void ObtainPlayerName(string playerName, string opponentName);
 
     #endregion
 
@@ -129,9 +126,7 @@ public class NetworkManager : Photon.PunBehaviour
 
 
     }
-
-    //trzeba dodac skipowanie spawnowania sie jednostek i brak mozliwosci interakcji + ekran "czekanie na drugiego gracza" jak sie jest samemu, 
-    // ponadto metode RPC ktora będzie wywoływana podczas połączenia sie z pokojem i która sprawi, że odblokują się interakcje i zespawują jednostki
+    
 
     public override void OnJoinedRoom()
     {
@@ -158,8 +153,6 @@ public class NetworkManager : Photon.PunBehaviour
     public void StartGame()
     {
         Debug.Log("START");
-
-
         if (GameStarted != null)
         {
             GameStarted();
@@ -182,30 +175,24 @@ public class NetworkManager : Photon.PunBehaviour
         {
             Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-            GameObject Manager = GameObject.Find("Manager");
-            FogOfWar fog = Manager.GetComponent<FogOfWar>();
             if (isPlayerOne)
             {
-                RtsManager.Credits.setDefaultPlayer(RtsManager.Credits.Players[0]);
+                RtsManager.StrategyManager.setDefaultPlayer(RtsManager.StrategyManager.Players[0]);
 
                 Vector3 buildingSpawn = new Vector3(spawnPoint2.transform.position.x + 30, spawnPoint2.transform.position.y, spawnPoint2.transform.position.z);
 
                 SpawnNewUnit(spawnPoint2.transform.position, this.antPrefab.name, ShowUnitInfo.TYPE.WARRIORANT);
                 
                 SpawnBuilding(buildingSpawn);
-
-
             }
             else
             {
-                RtsManager.Credits.setDefaultPlayer(RtsManager.Credits.Players[1]);
+                RtsManager.StrategyManager.setDefaultPlayer(RtsManager.StrategyManager.Players[1]);
 
                 SpawnNewUnit(spawnPoint.transform.position, this.antPrefab.name, ShowUnitInfo.TYPE.ANT);
 
                 Vector3 spawnPoint2x = new Vector3(spawnPoint.transform.position.x + 30, spawnPoint.transform.position.y, spawnPoint.transform.position.z);
-
-
-
+                
                 SpawnBuilding(spawnPoint2x);
             }
 
@@ -216,8 +203,7 @@ public class NetworkManager : Photon.PunBehaviour
 
 
     #region Public Methods
-
-
+    
     /// <summary>
     /// Start the connection process. 
     /// - If already connected, we attempt joining a random room
@@ -299,7 +285,6 @@ public class NetworkManager : Photon.PunBehaviour
         opponentPoints = points;
     }
 
-
     private void EndGame()
     {
         photonView.RPC("GameEnded", PhotonTargets.All, sessionService.GetCurrentSession().OpponentPlayer.Username);
@@ -310,6 +295,7 @@ public class NetworkManager : Photon.PunBehaviour
     {
         Spawn(position, name, type, antPrefab.name);
     }
+
     public void SpawnBuilding(Vector3 position)
     {
         GameObject building = Spawn(position, "MOTHERBASE", ShowUnitInfo.TYPE.MOTHERBASE, buildingPrefab.name);
@@ -327,12 +313,10 @@ public class NetworkManager : Photon.PunBehaviour
             if (info.photonView.isMine)
                 fog.addRevealer(go);
             else
-                RtsManager.Credits.enemies.Add(go);
+                RtsManager.StrategyManager.enemies.Add(go);
         }
         return go;
     }
 
-
     #endregion
-
 }

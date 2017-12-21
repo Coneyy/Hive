@@ -24,13 +24,13 @@ public class SearchEnemies : MonoBehaviour
                     {
                         if (!go.GetComponent<ShowUnitInfo>().onSight)
                         {
-                            if (!RtsManager.Credits.enemies.Contains(go))
+                            if (!RtsManager.StrategyManager.enemies.Contains(go))
 
                             {
 
                        
 
-                                RtsManager.Credits.enemies.Add(go);
+                                RtsManager.StrategyManager.enemies.Add(go);
                                 go.SetActive(false);
                             }
                         }
