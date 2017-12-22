@@ -168,6 +168,37 @@ namespace HiveAPI.Controllers
             return Ok(points);
         }
 
+        [Authorize]
+        [HttpGet]
+        [Route("highscores")]
+        public async Task<IActionResult> GetHighscores()
+        {
+
+            var players = await _context.Matches.Select(m => m.Player1).Distinct().ToListAsync();
+            players.AddRange(_context.Matches.Select(m => m.Player2).Distinct().ToList());
+            players = players.Distinct().ToList();
+            var highscores = new Dictionary<User, int>();
+            players.ForEach(p => highscores.Add(p, 0));
+
+            await _context.Matches.ForEachAsync(m =>
+                                               {
+                                                   highscores[m.Player1] +=(int) m.Player1Points;
+                                                   highscores[m.Player2] += (int)m.Player2Points;
+                                               });
+            if (!highscores.Any())
+            {
+                return NoContent();
+            }
+
+            var highscoresDto = new Dictionary<UserDto, int>();
+            
+            foreach (var kvp in highscores) {
+                highscoresDto.Add(new UserDto(kvp.Key), kvp.Value);
+            }
+
+            return Ok(highscoresDto.Select( hs => new { player = hs.Key, points = hs.Value }).OrderByDescending(o => o.points));
+        }
+
         private bool MatchExists(Guid id)
         {
             return _context.Matches.Any(e => e.Id == id);
