@@ -47,7 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AnimatorControllerSpider.cs" />
+     <Compile Include="Assets\AntAnimatorScript.cs" />
      <Compile Include="Assets\Downloaded\HSPackages\InfiniteGround\Script\Ground.cs" />
+     <Compile Include="Assets\Downloaded\TornadoBanditsStudio\Low Poly Free Pack\Scripts\TBS_CameraMovement.cs" />
+     <Compile Include="Assets\Downloaded\TornadoBanditsStudio\Low Poly Free Pack\Water\TBS_Water.cs" />
      <Compile Include="Assets\Move.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\CustomTypes.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\Enums.cs" />
@@ -135,7 +138,6 @@
      <Compile Include="Assets\Scripts\Buildings\BuildingManager.cs" />
      <Compile Include="Assets\Scripts\Buildings\IBuilding.cs" />
      <Compile Include="Assets\Scripts\Definitions\PlayerSetupDefinitions.cs" />
-     <Compile Include="Assets\Scripts\Definitions\UnitDefinition.cs" />
      <Compile Include="Assets\Scripts\FogOfWar\FogOfWar.cs" />
      <Compile Include="Assets\Scripts\GUI\BottomPanelConnector.cs" />
      <Compile Include="Assets\Scripts\GUI\CodeGUI.cs" />
@@ -154,23 +156,21 @@
      <Compile Include="Assets\Scripts\Interactions\ShowUnitInfo.cs" />
      <Compile Include="Assets\Scripts\Interactive.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkManager.cs" />
-     <Compile Include="Assets\Scripts\Network\NetworkPlayer.cs" />
      <Compile Include="Assets\Scripts\Network\PhotonInteractions\FightInteraction.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\ApiUrls.cs" />
-     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\FakePlayerService.cs" />
+     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IMatchService.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IPlayerManager.cs" />
-     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\IPlayerService.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\ISessionService.cs" />
+     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\MatchService.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\HivePlayer.cs" />
-     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\NotFoundException.cs" />
+     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\Match.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\Session.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\Models\SessionSingleton.cs" />
-     <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\PlayerService.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerInfrastructure\SessionService.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerManager.cs" />
-     <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerMark.cs" />
+     <Compile Include="Assets\Scripts\ResourceScript.cs" />
      <Compile Include="Assets\Scripts\Rotation.cs" />
      <Compile Include="Assets\Scripts\RtsManager.cs" />
      <Compile Include="Assets\Scripts\SearchEnemies.cs" />

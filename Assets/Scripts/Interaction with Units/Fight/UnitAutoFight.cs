@@ -31,14 +31,15 @@ public class UnitAutoFight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (!GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
+
+		if (!GetComponent<ShowUnitInfo>().photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
 
         foreach (Interactive i in enemies)
         {
 			if (i == null)
 				continue;
 
-			if (MainScreenUtils.isClose(i.transform.position, transform.position, GetComponent<ShowUnitInfo>().attribiutes.sight))
+			if (MainScreenUtils.isClose(i.transform.position, transform.position, GetComponent<ShowUnitInfo>().sight))
                 continue;
             else
             {
@@ -59,7 +60,7 @@ public class UnitAutoFight : MonoBehaviour
             var interact = l.gameObject.transform.GetComponent<Interactive>(); // rzutuj element kolizji na interactive 
             if (interact == null) //jeśli nie jest interaktywny 
                 continue; // to przejdź do kolejnego elementu listy 
-			if (l.GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) // jeżeli to nie nasza jednostka
+			if (l.GetComponent<ShowUnitInfo>().photonView.isMine) // jeżeli to nie nasza jednostka
                 continue; // to przejdź do kolejnego elementu listy 
             if (interact.transform.position == transform.position) // jeżeli to ta jednostka na której włączyliśmy skrypt
                 continue; // to przejdź do kolejnego elementu listy 

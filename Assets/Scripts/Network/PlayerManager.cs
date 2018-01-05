@@ -7,129 +7,25 @@ using UnityEngine.UI;
 using System.Net;
 using Assets.Scripts.Network.PlayerInfrastructure.Models;
 using System;
+using Assets.Scripts.Network.PlayerInfrastructure;
 
 public class PlayerManager : IPlayerManager
 {
-    public static event LoggedIn PlayerLoggedIn;
-    public static event Registered PlayerRegistered;
-
-    public delegate void LoggedIn();
-    public delegate void Registered();
-    
-    private Text loginNotifier;
-    private Text registerNotifier;
-
-    public void Start()
-    {
-     
-    }
-
-    private void OnEnable()
-    {
-        LoginClick.LoginClicked += LogPlayerIn;
-        RegisterClick.RegisteredClicked += RegisterPlayer;
-    }
-
-    private void OnDisable()
-    {
-        LoginClick.LoginClicked -= LogPlayerIn;
-        RegisterClick.RegisteredClicked -= RegisterPlayer;
-    }
-    
     public PlayerManager()
     {
-        _playerService = new FakePlayerService();
         _sessionService = new SessionService();
+        _matchService = new MatchService();
     }
 
-    public override void RegisterPlayer(string email, string username, string password, string confirmPassword)
+    public override void UploadMatch(int myPoints, int enemyPoints)
     {
-        try
-        {
-            if (password.Equals(confirmPassword))
-            {
-                var newPlayer = _playerService.Register(email, username, password);
-                if (newPlayer != null)
-                {
-                    _sessionService.UpdateCurrentSession(newPlayer);
-                    _sessionService.UpdateCurrentSession(newPlayer);
-                    OnPlayerRegistered();
-                }
-            }
-            else
-            {
-                SetRegisterError("Passwords does not match");
-            }
-        }
-        catch (Exception ex)
-        {
-            SetRegisterError(ex.Message);
-        }
+        var match = new Match();
+        match.Player1 = _sessionService.GetCurrentSession().Player;
+        match.Player2 = _sessionService.GetCurrentSession().OpponentPlayer;
+        match.Player1Points = myPoints;
+        match.Player2Points = enemyPoints;
+        match.Date = DateTime.Now;
 
-        Debug.Log("Player registered, session:" + SessionSingleton.Session.Player.Username);
+        _matchService.UploadMatchInfo(match);
     }
-
-    public override void LogPlayerIn(string emailOrUsername, string password)
-    {
-        try
-        {
-            var player = _playerService.LogIn(emailOrUsername, password);
-            if (player != null)
-            {
-                _sessionService.UpdateCurrentSession(player);
-                OnPlayerLoggedIn();
-            }
-            ClearNotifications();
-        }
-        catch (Exception ex)
-        {
-            SetLoginError(ex.Message);
-        }
-
-        Debug.Log("Player logged in, session:" + SessionSingleton.Session.Player.Username);
-    }
-
-    public override void LogPlayerOut()
-    {
-        _playerService.LogOut();
-        _sessionService.ClearCurrentSession();
-        Debug.Log("Session cleared");
-    }
-
-
-
-    private void SetLoginError(string error)
-    {
-        loginNotifier.text = error;
-    }
-
-    private void SetRegisterError(string error)
-    {
-        registerNotifier.text = error;
-    }
-
-    private void ClearNotifications()
-    {
-        loginNotifier.text = "";
-        registerNotifier.text = "";
-    }
-
-
-
-    private void OnPlayerLoggedIn()
-    {
-        if (PlayerLoggedIn != null)
-        {
-            PlayerLoggedIn();
-        }
-    }
-
-    private void OnPlayerRegistered()
-    {
-        if (PlayerRegistered != null)
-        {
-            PlayerRegistered();
-        }
-    }
-
 }

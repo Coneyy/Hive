@@ -7,6 +7,7 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure
     public interface ISessionService
     {        
 		void UpdateCurrentSession(HivePlayer player);
+        void UpdateSessionOpponent(HivePlayer opponent);
 
         Session GetCurrentSession();
 

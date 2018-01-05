@@ -55,9 +55,9 @@ public class BottomPanelConnector : MonoBehaviour {
 
     }
 
-	public void changePanelVisibility (UnitDefinition.TYPE type)
+	public void changePanelVisibility (ShowUnitInfo.TYPE type)
 	{
-		if (type == UnitDefinition.TYPE.MOTHERBASE) {
+		if (type == ShowUnitInfo.TYPE.MOTHERBASE) {
 			BuildingPanel.SetActive (true);
 		} else
 			BuildingPanel.SetActive (false);

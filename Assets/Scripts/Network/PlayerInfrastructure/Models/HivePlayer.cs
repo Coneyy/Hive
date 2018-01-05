@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Hive.Assets.Scripts.Network.PlayerInfrastructure.Models
 {
+    [Serializable]
     public class HivePlayer
     {
 

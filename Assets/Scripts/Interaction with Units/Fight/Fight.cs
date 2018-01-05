@@ -83,9 +83,9 @@ public class Fight : MonoBehaviour {
 
 
             attackBuffer += Time.deltaTime; // zwiększamy buffer ataku
-			if (GetComponent<ShowUnitInfo>().attribiutes.attackDuration < attackBuffer) // jeśli buffer jest większy od częstotliwości ataku
+			if (GetComponent<ShowUnitInfo>().attackDuration < attackBuffer) // jeśli buffer jest większy od częstotliwości ataku
             {
-				enemy.GetComponent<ShowUnitInfo>().attribiutes.photonView.RPC("subtractHealth", PhotonTargets.All, GetComponent<ShowUnitInfo>().attribiutes.attack);
+				enemy.GetComponent<ShowUnitInfo>().photonView.RPC("subtractHealth", PhotonTargets.All, GetComponent<ShowUnitInfo>().attack);
 
 
                 attackBuffer = 0; // resetuj buffer 
@@ -112,7 +112,7 @@ public class Fight : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-		if (!GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
+		if (!GetComponent<ShowUnitInfo>().photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
 
 
         if (GetComponent<TouchNavigation>().isActive) // jeżeli poruszamy się jednostką, to automatyczna walka jest wyłączona!

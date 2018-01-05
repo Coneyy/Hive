@@ -6,12 +6,32 @@ using UnityEngine;
 public class ShowUnitInfo : Interaction
 {
 
-	public UnitDefinition attribiutes;
-	private float delay = 0.5f;
-	private float delayBuffer;
-	private bool isSelected = false;
+
+    public string unitName;
+    public float maxHealth, currentHealth, attack;
+    public float attackDuration;
+    public int sight;
+	public bool onSight = false;
 
 
+
+    public Sprite pic;
+    public enum TYPE { ANT = 100, SPIDER = 1000, WARRIORANT = 500, MOTHERBASE = 50 };
+    enum ATTACK { ANT = 20, SPIDER = 500, WARRIORANT = 30, MOTHERBASE=0 };
+    enum DURATION { ANT = 4, SPIDER = 7, WARRIORANT = 3, MOTHERBASE=0};
+    enum SIGHT { ANT = 40, SPIDER = 5, WARRIORANT = 40, MOTHERBASE=70};
+
+
+    public PhotonView photonView;
+
+	private TYPE type;
+    private float delay = 0.5f;
+    private float delayBuffer;
+
+    private bool isSelected = false;
+
+
+    // Update is called once per frame
     void Update()
     {
         delayBuffer +=Time.deltaTime;
@@ -19,9 +39,9 @@ public class ShowUnitInfo : Interaction
         {
             if(isSelected)
             {
-				BottomPanelConnector.Current.changePanelVisibility(attribiutes.type);
-				BottomPanelConnector.Current.setPic(attribiutes.pic);
-				BottomPanelConnector.Current.setLines(attribiutes.unitName, attribiutes.currentHealth + "/" + attribiutes.maxHealth);
+				BottomPanelConnector.Current.changePanelVisibility(type);
+                BottomPanelConnector.Current.setPic(pic);
+                BottomPanelConnector.Current.setLines(unitName, currentHealth + "/" + maxHealth);
              }
             delayBuffer = 0;
 
@@ -29,10 +49,15 @@ public class ShowUnitInfo : Interaction
 
     }
 
-	public void create(string name, UnitDefinition.TYPE type)
+	public void create(string name, TYPE type)
     {
-		attribiutes = new UnitDefinition ();
-		attribiutes.create (name, type);
+        this.type = type;
+        this.unitName = name;
+        this.maxHealth = (float)type;
+        this.currentHealth = this.maxHealth;
+		this.attack = (float)(ATTACK)Enum.Parse(typeof(ATTACK), type.ToString());
+		this.attackDuration= (float)(DURATION)Enum.Parse(typeof(DURATION), type.ToString());
+		this.sight = (int)(SIGHT)Enum.Parse(typeof(SIGHT), type.ToString());
     }
 
     public override void Dselect()
@@ -47,8 +72,8 @@ public class ShowUnitInfo : Interaction
     public override void Select()
     {
         isSelected = true;
-		BottomPanelConnector.Current.setPic(attribiutes.pic);
-		BottomPanelConnector.Current.setLines(attribiutes.unitName, attribiutes.currentHealth + "/" + attribiutes.maxHealth);
+        BottomPanelConnector.Current.setPic(pic);
+        BottomPanelConnector.Current.setLines(unitName, currentHealth + "/" + maxHealth);
 
 
     }

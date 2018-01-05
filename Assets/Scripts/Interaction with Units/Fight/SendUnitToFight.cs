@@ -25,7 +25,9 @@ public class SendUnitToFight : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-		if (!GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
+	
+
+		if (!GetComponent<ShowUnitInfo>().photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
 
         if (sMManager.Selections.Count == 0) // jeśli nie ma zaznaczonych jednostek, wyłącz skrypt
             return;
@@ -47,7 +49,7 @@ public class SendUnitToFight : MonoBehaviour {
             var interact = hit.transform.GetComponent<Interactive>(); // rzutowanie na obiekt interactive
             if (interact == null) // jeśli obiekt dotknięty przez promień nie jest interaktywny 
                 return; // to zakończ
-			if (!hit.transform.GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) // jeśli obiekt nie należy do gracza
+			if (!hit.transform.GetComponent<ShowUnitInfo>().photonView.isMine) // jeśli obiekt nie należy do gracza
             {
                 Debug.Log("DO ATAKU!");
                 fight.startFight(interact, false);

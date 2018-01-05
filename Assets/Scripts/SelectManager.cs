@@ -119,7 +119,7 @@ public class SelectManager : MonoBehaviour
                     else
                     {
          
-						if (hit.transform.GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) // jeśli obiekt należy do gracza
+						if (hit.transform.GetComponent<ShowUnitInfo>().photonView.isMine) // jeśli obiekt należy do gracza
                         {
 							if (Selections.Any (x => x is BuildingInteractive)) {
 								dselectAll ();
@@ -131,7 +131,7 @@ public class SelectManager : MonoBehaviour
 
                 }else
                 {
-					if (buildingInteract.GetComponent<ShowUnitInfo> ().attribiutes.photonView.isMine) {
+					if (buildingInteract.GetComponent<ShowUnitInfo> ().photonView.isMine) {
 						dselectAll ();
 						Selections.Add(buildingInteract);
 						buildingInteract.Select ();

@@ -31,5 +31,14 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure
 			}
 
 		}
+
+        public static string ApiCreateMatchUrl
+        {
+            get
+            {
+                return "http://hivegameapi.azurewebsites.net/api/matches";
+            }
+
+        }
     }
 }
