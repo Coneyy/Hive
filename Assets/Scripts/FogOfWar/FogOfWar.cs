@@ -66,10 +66,10 @@ public class FogOfWar : MonoBehaviour
         {
           
             if (revealer.GetComponent<BuildingInteractive>() == null)
-				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
+				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().attribiutes.sight);
             else
             {
-				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
+				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().attribiutes.sight);
 
             }
   
@@ -266,12 +266,12 @@ public class FogOfWar : MonoBehaviour
 
                 float distance = Vector3.Distance(g.transform.position, t.transform.position); // liczymy dystans pomiędzy "odkrywaczem" a obiektem
 
-				if (!(distance > g.GetComponent<ShowUnitInfo>().sight + 50)) // jeśli dystans jest większy niż jego wzrok + 50 jednostek 
+				if (!(distance > g.GetComponent<ShowUnitInfo>().attribiutes.sight + 50)) // jeśli dystans jest większy niż jego wzrok + 50 jednostek 
                 {
                     if (distance < distances[iterator]) // jeśli dystans jest mniejszy niż najmniejszy dystans "odkrywacza" a obiektu
                     {
                         distances[iterator] = distance; //ustaw nowy najmniejszy dystans
-                        float difference = g.GetComponent<ShowUnitInfo>().sight + 50 + darkColor; // różnica, która zapewni, że w największej odległości kolor będzie taki sam jak "darkColor"
+						float difference = g.GetComponent<ShowUnitInfo>().attribiutes.sight + 50 + darkColor; // różnica, która zapewni, że w największej odległości kolor będzie taki sam jak "darkColor"
                         float colorChange = (difference - distance); // obliczamy nowy kolor w zależności od dystansu
                         t.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(colorChange / 255f, colorChange / 255f, colorChange / 255f)); //ustaw nowy kolor
                     }

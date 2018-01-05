@@ -10,10 +10,10 @@ public class FightInteraction : MonoBehaviour {
 	[PunRPC]
 	bool subtractHealth(float value)
 	{
-		if (!GetComponent<ShowUnitInfo>().photonView.isMine) return false; // jak nie jest to nasza jednostka, to wyłącz skrypt
-		GetComponent<ShowUnitInfo>().currentHealth = GetComponent<ShowUnitInfo>().currentHealth - value;
+		if (!GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) return false; // jak nie jest to nasza jednostka, to wyłącz skrypt
+		GetComponent<ShowUnitInfo>().attribiutes.currentHealth = GetComponent<ShowUnitInfo>().attribiutes.currentHealth - value;
 
-		if (GetComponent<ShowUnitInfo>().currentHealth <= 0)
+		if (GetComponent<ShowUnitInfo>().attribiutes.currentHealth <= 0)
 		{
 			GetComponent<ShowUnitInfo>().Dselect();
 			OnBeforeObjectDestroying (gameObject);

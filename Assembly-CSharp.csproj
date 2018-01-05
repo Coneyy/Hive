@@ -131,8 +131,8 @@
      <Compile Include="Assets\Scripts\BuildingInteractions\BuildingGuiConnector.cs" />
      <Compile Include="Assets\Scripts\BuildingInteractions\BuildingInteractive.cs" />
      <Compile Include="Assets\Scripts\Buildings\BaseBuilding.cs" />
+     <Compile Include="Assets\Scripts\Buildings\BuildingDefinition.cs" />
      <Compile Include="Assets\Scripts\Buildings\BuildingManager.cs" />
-     <Compile Include="Assets\Scripts\Buildings\BuildingSettings.cs" />
      <Compile Include="Assets\Scripts\Buildings\IBuilding.cs" />
      <Compile Include="Assets\Scripts\Definitions\PlayerSetupDefinitions.cs" />
      <Compile Include="Assets\Scripts\Definitions\UnitDefinition.cs" />

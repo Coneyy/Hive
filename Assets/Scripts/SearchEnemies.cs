@@ -20,9 +20,9 @@ public class SearchEnemies : MonoBehaviour
             {
                 if (go.GetComponent<Interactive>() != null)
                 {
-                    if (!go.GetComponent<ShowUnitInfo>().photonView.isMine)
+					if (!go.GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine)
                     {
-                        if (!go.GetComponent<ShowUnitInfo>().onSight)
+						if (!go.GetComponent<ShowUnitInfo>().attribiutes.onSight)
                         {
                             if (!RtsManager.Current.enemies.Contains(go))
 

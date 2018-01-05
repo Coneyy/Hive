@@ -6,16 +6,19 @@ using UnityEngine;
 public class BottomPanelConnector : MonoBehaviour {
 
     public static BottomPanelConnector Current;
-	public GameObject BuildingPanel;
-
-    public Image Pic, ResourcePic;
-    public Text Line1, Line2, ResourceText;
 
 
     public BottomPanelConnector ()
     {
         Current = this;
     }
+
+	public GameObject BuildingPanel;
+
+	public Image Pic, ResourcePic;
+	public Text Line1, Line2, ResourceText;
+
+
     public void setLines(string line1, string line2)
     {
         Line1.text = line1;
@@ -52,9 +55,9 @@ public class BottomPanelConnector : MonoBehaviour {
 
     }
 
-	public void changePanelVisibility (ShowUnitInfo.TYPE type)
+	public void changePanelVisibility (UnitDefinition.TYPE type)
 	{
-		if (type == ShowUnitInfo.TYPE.MOTHERBASE) {
+		if (type == UnitDefinition.TYPE.MOTHERBASE) {
 			BuildingPanel.SetActive (true);
 		} else
 			BuildingPanel.SetActive (false);

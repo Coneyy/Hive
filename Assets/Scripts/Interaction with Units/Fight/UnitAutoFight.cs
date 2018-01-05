@@ -31,14 +31,14 @@ public class UnitAutoFight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GetComponent<ShowUnitInfo>().photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
+		if (!GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
 
         foreach (Interactive i in enemies)
         {
 			if (i == null)
 				continue;
 
-            if (MainScreenUtils.isClose(i.transform.position, transform.position, GetComponent<ShowUnitInfo>().sight))
+			if (MainScreenUtils.isClose(i.transform.position, transform.position, GetComponent<ShowUnitInfo>().attribiutes.sight))
                 continue;
             else
             {
@@ -51,13 +51,6 @@ public class UnitAutoFight : MonoBehaviour
 
 
 
-        if (GetComponent<TouchNavigation>().isActive) return; // jeżeli poruszamy się jednostką, to automatyczna walka jest wyłączona!
-
-
-
-        
-
-
 
         Collider[] list = Physics.OverlapSphere(transform.position, range); // Sprawdzamy wszystkie kolizje z podaną sferą, zwraca listę colliderów
         enemies.Clear();
@@ -66,7 +59,7 @@ public class UnitAutoFight : MonoBehaviour
             var interact = l.gameObject.transform.GetComponent<Interactive>(); // rzutuj element kolizji na interactive 
             if (interact == null) //jeśli nie jest interaktywny 
                 continue; // to przejdź do kolejnego elementu listy 
-            if (l.GetComponent<ShowUnitInfo>().photonView.isMine) // jeżeli to nie nasza jednostka
+			if (l.GetComponent<ShowUnitInfo>().attribiutes.photonView.isMine) // jeżeli to nie nasza jednostka
                 continue; // to przejdź do kolejnego elementu listy 
             if (interact.transform.position == transform.position) // jeżeli to ta jednostka na której włączyliśmy skrypt
                 continue; // to przejdź do kolejnego elementu listy 
@@ -79,6 +72,9 @@ public class UnitAutoFight : MonoBehaviour
         }
         if (fight.isFighting)
             return;
+		
+		if (GetComponent<TouchNavigation>().isActive) return; // jeżeli poruszamy się jednostką, to automatyczna walka jest wyłączona!
+
 
         float distance = float.MaxValue;
         float tempDistance;
@@ -107,11 +103,6 @@ public class UnitAutoFight : MonoBehaviour
 
             }
         }
-
-
-
-
-
 
 
     }

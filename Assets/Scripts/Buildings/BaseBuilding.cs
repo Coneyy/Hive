@@ -146,12 +146,12 @@ public class BaseBuilding : BuildingInteractive, IBuilding
 
     private void Awake()
     {
-        level = BuildingSettings.StartingLevel;
-        health = BuildingSettings.StartingHealth;
-        maxHealth = BuildingSettings.StartingMaxHealth;
-        upgradeCost = BuildingSettings.UpgradeCost;
-        unitCost = BuildingSettings.UnitCost;
-        repairCost = BuildingSettings.RepairCost;
+		level = BuildingDefinition.StartingLevel;
+		health = BuildingDefinition.StartingHealth;
+		maxHealth = BuildingDefinition.StartingMaxHealth;
+		upgradeCost = BuildingDefinition.UpgradeCost;
+		unitCost = BuildingDefinition.UnitCost;
+		repairCost = BuildingDefinition.RepairCost;
 
         networkManager = GameObject.Find("Manager").GetComponent<NetworkManager>();
     }
@@ -170,7 +170,7 @@ public class BaseBuilding : BuildingInteractive, IBuilding
 
     public void SpawnUnit()
     {
-		networkManager.SpawnNewUnit(UnitSpawnPosition,"name",ShowUnitInfo.TYPE.WARRIORANT);
+		networkManager.SpawnNewUnit(UnitSpawnPosition,"name",UnitDefinition.TYPE.WARRIORANT);
     }
 
     public bool Upgrade()

@@ -181,8 +181,8 @@ public class NetworkManager : Photon.PunBehaviour
 
 				var go = PhotonNetwork.Instantiate("Photon_prefabs/NotAnimated/"+this.antPrefab.name, spawnPoint2.transform.position, Quaternion.identity, 0);
 				ShowUnitInfo info = go.GetComponent<ShowUnitInfo>();
-				info.create("Remigiusz", ShowUnitInfo.TYPE.WARRIORANT);
-				if (info.photonView.isMine)
+				info.create("Remigiusz", UnitDefinition.TYPE.WARRIORANT);
+				if (info.attribiutes.photonView.isMine)
 					fog.addRevealer(go);
 
 
@@ -196,8 +196,8 @@ public class NetworkManager : Photon.PunBehaviour
 
 				var go = PhotonNetwork.Instantiate("Photon_prefabs/NotAnimated/" + this.antPrefab.name, spawnPoint.transform.position, Quaternion.identity, 0);
 				ShowUnitInfo info = go.GetComponent<ShowUnitInfo>();
-				info.create("Arkadiusz", ShowUnitInfo.TYPE.ANT);
-				if (info.photonView.isMine)
+				info.create("Arkadiusz", UnitDefinition.TYPE.ANT);
+				if (info.attribiutes.photonView.isMine)
 					fog.addRevealer(go);
 				else
 					RtsManager.Current.enemies.Add(go);
@@ -278,17 +278,17 @@ public class NetworkManager : Photon.PunBehaviour
 	}
 		
 
-	public void SpawnNewUnit(Vector3 position,string name, ShowUnitInfo.TYPE type)
+	public void SpawnNewUnit(Vector3 position,string name, UnitDefinition.TYPE type)
 	{
 		Spawn (position, name, type, antPrefab.name);
 	}
 	public void SpawnBuilding(Vector3 position)
 	{
-		GameObject building=Spawn (position, "MOTHERBASE", ShowUnitInfo.TYPE.MOTHERBASE, buildingPrefab.name);
+		GameObject building=Spawn (position, "MOTHERBASE", UnitDefinition.TYPE.MOTHERBASE, buildingPrefab.name);
 		buildingManager.Building = building;
 	}
 
-	public GameObject Spawn(Vector3 position,string name, ShowUnitInfo.TYPE type,string prefabName)
+	public GameObject Spawn(Vector3 position,string name, UnitDefinition.TYPE type,string prefabName)
 	{
 		GameObject go = null;
 		if (PhotonNetwork.connected) 
@@ -296,7 +296,7 @@ public class NetworkManager : Photon.PunBehaviour
 			go = PhotonNetwork.Instantiate("Photon_prefabs/NotAnimated/"+prefabName, position, Quaternion.identity, 0);
 			ShowUnitInfo info = go.GetComponent<ShowUnitInfo>();
 			info.create(name, type);
-			if (info.photonView.isMine)
+			if (info.attribiutes.photonView.isMine)
 				fog.addRevealer(go);
 			else
 				RtsManager.Current.enemies.Add(go);
