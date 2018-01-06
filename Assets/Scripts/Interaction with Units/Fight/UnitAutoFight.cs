@@ -6,7 +6,7 @@ public class UnitAutoFight : MonoBehaviour
 {
 
     // Use this for initialization
-    public float range;
+    private float range;
 
     private List<Interactive> enemies; // lista przeciwników jednostki
     private Vector3 enemyPositionToSend; // pozycja przeciwnika 
@@ -26,6 +26,7 @@ public class UnitAutoFight : MonoBehaviour
         enemies = new List<Interactive>(); // tworzenie listy wrogów
         movingUnit = GetComponent<MovingUnit>();
         fight = GetComponent<Fight>();
+		range = GetComponent<ShowUnitInfo> ().sight;
     }
 
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class UnitAutoFight : MonoBehaviour
 			if (i == null)
 				continue;
 
-			if (MainScreenUtils.isClose(i.transform.position, transform.position, GetComponent<ShowUnitInfo>().sight))
+			if (MainScreenUtils.isClose(i.transform.position, transform.position, range))
                 continue;
             else
             {
