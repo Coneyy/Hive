@@ -24,6 +24,10 @@ public class FogOfWar : MonoBehaviour
     public GameObject plants;
     public float darkColor;
     public int fogOffset;
+    public Transform terrainTransform;
+
+	private int frameCounter=0;
+	List<float> distances = new List<float>(); // tablica zawierający najmniejszy dystans pomiędzy obiektem a odkrywaczem
 
 
     public void addRevealer(GameObject revealer)
@@ -59,21 +63,20 @@ public class FogOfWar : MonoBehaviour
     }
     private void UpdateShadowMap()
     {
+		
         foreach (var revealer in _revealers)
         {
-            //DO ZASTANOWIENIA SIE NAD OPTYMALIZACJA RYSOWANIA ODKRYWANIA
-            // if (revealer.transform.hasChanged)
-            // {
+          
             if (revealer.GetComponent<BuildingInteractive>() == null)
-                DrawFilledMidpointCircleSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
+				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x + 115, (int)revealer.transform.position.z + 135, revealer.GetComponent<ShowUnitInfo>().sight);
             else
             {
-                DrawFilledMidpointCircleSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
+				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x + 115, (int)revealer.transform.position.z +135, revealer.GetComponent<ShowUnitInfo>().sight);
 
             }
-            //    revealer.transform.hasChanged = false;
-            // }
+  
         }
+        
     }
     public void drawBuildingCircle(int centerX, int centerY, int radius)
     {
@@ -237,15 +240,20 @@ public class FogOfWar : MonoBehaviour
 
         }
 
+        terrainTransform = GameObject.Find("ImageTarget").transform;
     }
     private void Update()
     {
 
+		frameCounter++;
+		if (frameCounter < 2)
+			return;
+
+		distances.Clear ();
 
         _shadowMap.SetPixels32(_pixels); // malujemy mapę na "szaro"
         UpdateShadowMap(); // odkrywamy część mapy
 
-        List<float> distances = new List<float>(); // tablica zawierający najmniejszy dystans pomiędzy obiektem a odkrywaczem
 
         foreach (Transform t in plants.transform)
         {
@@ -260,13 +268,12 @@ public class FogOfWar : MonoBehaviour
 
                 float distance = Vector3.Distance(g.transform.position, t.transform.position); // liczymy dystans pomiędzy "odkrywaczem" a obiektem
 
-                if (distance > g.GetComponent<ShowUnitInfo>().sight + 50) ; // jeśli dystans jest większy niż jego wzrok + 50 jednostek 
-                else
+				if (!(distance > g.GetComponent<ShowUnitInfo>().sight + 50)) // jeśli dystans jest większy niż jego wzrok + 50 jednostek 
                 {
                     if (distance < distances[iterator]) // jeśli dystans jest mniejszy niż najmniejszy dystans "odkrywacza" a obiektu
                     {
                         distances[iterator] = distance; //ustaw nowy najmniejszy dystans
-                        float difference = g.GetComponent<ShowUnitInfo>().sight + 50 + darkColor; // różnica, która zapewni, że w największej odległości kolor będzie taki sam jak "darkColor"
+						float difference = g.GetComponent<ShowUnitInfo>().sight + 50 + darkColor; // różnica, która zapewni, że w największej odległości kolor będzie taki sam jak "darkColor"
                         float colorChange = (difference - distance); // obliczamy nowy kolor w zależności od dystansu
                         t.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(colorChange / 255f, colorChange / 255f, colorChange / 255f)); //ustaw nowy kolor
                     }

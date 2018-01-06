@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Hive.Assets.Scripts.Network.PlayerInfrastructure.Models
 {
+    [Serializable]
     public class HivePlayer
     {
 
@@ -20,8 +21,9 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure.Models
             Email = email;
             Password = password;
         }
+	
 
-        public HivePlayer(string emailOrUsername, string password)
+		public HivePlayer(string emailOrUsername, string password)
         {
             if (emailOrUsername.Contains("@"))
             {

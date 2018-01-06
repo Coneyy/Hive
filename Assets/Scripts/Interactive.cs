@@ -12,6 +12,7 @@ public class Interactive : MonoBehaviour {
         foreach (var selection in GetComponents<Interaction>())
         {
             selection.Select();
+
         }
     }
     public void Dselect()

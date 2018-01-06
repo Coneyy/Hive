@@ -1,16 +1,9 @@
-﻿using HiveAPI.Data;
-using HiveAPI.Models;
-using HiveAPI.Security;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using HiveAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,132 +12,100 @@ namespace HiveAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        private readonly HiveApiContext _context;
-        private readonly AppSettings _settings;
+        private readonly UserContext _context;
 
-        public UserController(HiveApiContext context, IOptions<AppSettings> appOptions)
+        public UserController(UserContext context)
         {
             _context = context;
-            _settings = appOptions.Value;
+
+            if (_context.Users.Count() == 0)
+            {
+                _context.Users.Add(new User("ExampleUser", "example@example.com", "1234"));
+                _context.SaveChanges();
+            }
         }
 
         [HttpGet]
-        [Authorize]
-        public async Task<IEnumerable<UserDto>> GetAll()
+        public IEnumerable<User> GetAll()
         {
-            return await _context.Users.Select(u => new UserDto(u)).ToListAsync();
+            return _context.Users.ToList();
         }
 
         [HttpGet("{id}", Name = "GetUser")]
-        [Authorize]
-        public async Task<IActionResult> GetById(Guid id)
+        public IActionResult GetById(Guid id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(t => t.Id.Equals(id));
+            var user = _context.Users.FirstOrDefault(t => t.Id == id);
             if (user == null)
             {
                 return NotFound();
             }
-            return Ok(user);
+            return new ObjectResult(user);
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [Route("signin")]
-        public async Task<IActionResult> SignIn([FromBody] User loginUser)
+        public IActionResult SignIn([FromBody] User loginUser)
         {
-            var user = await _context.Users.Where(u => (u.Username.Equals(loginUser.Username) || u.Email.Equals(loginUser.Email)) && PasswordHasher.CheckMatch(u.Password,loginUser.Password)).SingleOrDefaultAsync();
+            var user = _context.Users.Where(u => (u.Username.Equals(loginUser.Username) || u.Email.Equals(loginUser.Email)) && u.Password.Equals(loginUser.Password)).SingleOrDefault();
             if (user == null)
             {
-                return BadRequest("Zły login lub hasło");
+                return NoContent();
             }
 
-            var token = JWTTokenCreator.GetNewToken(user.Id.ToString(), _settings.SecurityKey, 60);
-
-            return Ok(new
-            {
-                user = new UserDto(user),
-                token = new JwtSecurityTokenHandler().WriteToken(token)
-            });
+            return new ObjectResult(new UserDto(user));
         }
 
         [HttpPost(Name = "CreateUser")]
-        [AllowAnonymous]
         [Route("create")]
-        public async Task<IActionResult> Create([FromBody] User createUser)
+        public IActionResult Create([FromBody] User createUser)
         {
-            var user = await _context.Users.Where(u => (u.Username.Equals(createUser.Username) || u.Email.Equals(createUser.Email))).SingleOrDefaultAsync();
+            var user = _context.Users.Where(u => (u.Username.Equals(createUser.Username) || u.Email.Equals(createUser.Email)) && u.Password.Equals(createUser.Password)).SingleOrDefault();
             if (user != null)
             {
-                return BadRequest("Użytkownik już istnieje");
+                return BadRequest();
             }
 
-            if (!IsEmailValid(createUser.Email) || IsPasswordValid(createUser.Password))
-            {
-                return BadRequest("Email jest nieprawidłowy, lub hasło krótsze niż 6 znaków");
-            }
-
-
-            var newUser = new User(createUser.Username, createUser.Email, PasswordHasher.CalculateHash(createUser.Password));
+            var newUser = new User(createUser.Username, createUser.Email, createUser.Password);
             _context.Users.Add(newUser);
-            await _context.SaveChangesAsync();
-
-            var token = JWTTokenCreator.GetNewToken(newUser.Username, _settings.SecurityKey, 60);
-
-            return Ok(new
-            {
-                user = new UserDto(newUser),
-                token = new JwtSecurityTokenHandler().WriteToken(token)
-            });
+            _context.SaveChanges();
+            return CreatedAtRoute("CreateUser", new UserDto(newUser));
         }
 
         [HttpPut("{id}")]
-        [Authorize]
-        public async Task<IActionResult> Update(Guid id, [FromBody] UserDto user, [FromBody] string password)
+        public IActionResult Update(Guid id, [FromBody] UserDto user, [FromBody] string password)
         {
             if (user == null || user.Id != id)
             {
                 return BadRequest();
             }
 
-            var dbUser = await _context.Users.FirstOrDefaultAsync(t => t.Id == id);
+            var dbUser = _context.Users.FirstOrDefault(t => t.Id == id);
             if (dbUser == null)
             {
                 return NotFound();
             }
-
+            
             dbUser.Username = user.Username;
             dbUser.Email = user.Email;
             dbUser.Password = password;
 
             _context.Users.Update(dbUser);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return new NoContentResult();
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
-        public async Task<IActionResult> Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
-            var dbUser = await _context.Users.FirstOrDefaultAsync(t => t.Id == id);
+            var dbUser = _context.Users.FirstOrDefault(t => t.Id == id);
             if (dbUser == null)
             {
                 return NotFound();
             }
 
             _context.Users.Remove(dbUser);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return new NoContentResult();
-        }
-
-        bool IsEmailValid(string email)
-        {
-            var validator = new EmailAddressAttribute();
-            return validator.IsValid(email);
-        }
-
-        bool IsPasswordValid(string password)
-        {
-            return password.Length >= 6;
         }
 
     }

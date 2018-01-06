@@ -20,9 +20,22 @@ namespace Hive.Assets.Scripts.Network.PlayerInfrastructure
             SessionSingleton.Session.Player = player;
         }
 
+        public void UpdateCurrentSession(HivePlayer player, HivePlayer opponent)
+        {
+            SessionSingleton.Session.Player = player;
+            SessionSingleton.Session.OpponentPlayer = opponent;
+        }
+
+        public void UpdateSessionOpponent(HivePlayer opponent)
+        {
+            SessionSingleton.Session.OpponentPlayer = opponent;
+        }
+
         public  Session GetCurrentSession()
         {
            return SessionSingleton.Session;
         }
+
+
     }
 }

@@ -25,13 +25,18 @@ public class CodeGUI : MonoBehaviour
     GameObject manager;
     GameObject bottomBar;
     SelectManager SManager;
+    GameObject LoggingMenu; //menu (canvas) z logowaniem i rejestracja
+    
+
+ 
+
     void Start()
     {
         bottomBar = GameObject.Find("BottomBarController");
         manager = GameObject.Find("Manager");
         SManager = manager.GetComponent<SelectManager>();
         RectTransform objectRectTransform = Panel.GetComponent<RectTransform>();
-        panelHeight = RtsManager.Current.scaleToResolution(objectRectTransform.rect.height);
+        panelHeight = MainScreenUtils.scaleToResolution(objectRectTransform.rect.height);
         float y = bottomBar.transform.position.y - Screen.height + panelHeight;
 
         HiddenBottomBar = 0;
@@ -43,7 +48,17 @@ public class CodeGUI : MonoBehaviour
         startingPosition.y = y;
 
         bottomBar.transform.position = startingPosition;
+
+		bottomBar.SetActive (false);
+		NetworkManager.GameStarted += showBar;
+
+        LoggingMenu = GameObject.Find("LoginCanvas");
     }
+	public void showBar()
+	{
+		bottomBar.SetActive (true);
+
+	}
 
     public void hideBottomBar()
     {
@@ -140,4 +155,10 @@ public class CodeGUI : MonoBehaviour
             show();
         }
     }
+
+    private void DisableLoggingMenu()
+    {
+        LoggingMenu.SetActive(false);
+    }
+
 }

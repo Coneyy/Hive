@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MainScene.unity
+- path: "Assets/Scenes/MainScene \u2014 kopia (16.12.2017).unity"
   isLoaded: 1
   isActive: 1

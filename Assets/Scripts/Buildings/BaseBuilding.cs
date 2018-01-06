@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseBuilding : BuildingInteractive, IBuilding
 {
+    public static event Action Destroyed;
+
     public GameObject[] _extensions;
     public GameObject _base;
 
@@ -140,18 +143,18 @@ public class BaseBuilding : BuildingInteractive, IBuilding
     {
         get
         {
-            return (MaxHealth - Health) * RepairCostPerHp; 
+            return (MaxHealth - Health) * RepairCostPerHp;
         }
     }
 
     private void Awake()
     {
-        level = BuildingSettings.StartingLevel;
-        health = BuildingSettings.StartingHealth;
-        maxHealth = BuildingSettings.StartingMaxHealth;
-        upgradeCost = BuildingSettings.UpgradeCost;
-        unitCost = BuildingSettings.UnitCost;
-        repairCost = BuildingSettings.RepairCost;
+		level = BuildingDefinition.StartingLevel;
+		health = BuildingDefinition.StartingHealth;
+		maxHealth = BuildingDefinition.StartingMaxHealth;
+		upgradeCost = BuildingDefinition.UpgradeCost;
+		unitCost = BuildingDefinition.UnitCost;
+		repairCost = BuildingDefinition.RepairCost;
 
         networkManager = GameObject.Find("Manager").GetComponent<NetworkManager>();
     }
@@ -170,7 +173,7 @@ public class BaseBuilding : BuildingInteractive, IBuilding
 
     public void SpawnUnit()
     {
-        networkManager.SpawnNewUnit(UnitSpawnPosition);
+        networkManager.SpawnNewUnit(UnitSpawnPosition, "name", ShowUnitInfo.TYPE.WARRIORANT);
     }
 
     public bool Upgrade()
@@ -184,5 +187,13 @@ public class BaseBuilding : BuildingInteractive, IBuilding
         MaxHealth += (int)(MaxHealth * 0.15);
         _extensions[level - 1].SetActive(true);
         return true;
+    }
+
+    public void BuildingDestroyed()
+    {
+        if (Destroyed != null)
+        {
+            Destroyed();
+        }
     }
 }

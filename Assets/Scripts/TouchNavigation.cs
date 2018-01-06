@@ -28,6 +28,11 @@ public class TouchNavigation : Interaction
     private bool bottomMenuBlock = false; // czy dolne menu blokuje kawałek swiata gry
 
     
+	public void stopAgent()
+	{
+		agent.Stop(); // to pozwól mu zakończyć 
+		isActive = false; // agent przestaje działać
+	}
 
     public override void Dselect()
     {
@@ -155,7 +160,7 @@ public class TouchNavigation : Interaction
             {
                 timesincestart = Time.time; // zapisujemy czas od początku gry
                 firstTargetTouched = Input.GetTouch(0).position; // zapisujemy miejsce w którym rozpoczęliśmy dotyk 
-                firstTarget = RtsManager.Current.ScreenPointToMapPosition(Input.GetTouch(0).position); // rzucamy promień w to miejsce
+                firstTarget = MainScreenUtils.ScreenPointToMapPosition(Input.GetTouch(0).position); // rzucamy promień w to miejsce
                 if (firstTarget == Vector3.zero)
                     return; // jeśli Vector3.zero, to kliknęliśmy w złe miejsce (np poza mapę)
 
@@ -196,7 +201,7 @@ public class TouchNavigation : Interaction
         }
         if (selected && Input.touchCount != 0) // jeśli coś jest zaznaczone i dotykamy ekranu
         {
-            var tempTarget = RtsManager.Current.ScreenPointToMapPosition(Input.GetTouch(0).position); // wynik promienia z obecnego miejsca które dotykamy
+            var tempTarget = MainScreenUtils.ScreenPointToMapPosition(Input.GetTouch(0).position); // wynik promienia z obecnego miejsca które dotykamy
             var tempTargetTouched = Input.GetTouch(0).position; // obecne miejsce które dotykamy na ekranie
             if (checkIfInteractive()) return; // jeżeli to w co kliknęliśmy jest interaktywnym obiektem, to zwróć
 

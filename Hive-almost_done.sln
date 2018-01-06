@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hive-almost_done.Plugins", "Hive-almost_done.Plugins.csproj", "{1CCE73E4-2795-429C-C2F2-27B5191C3256}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hive-almost_done", "Hive-almost_done.csproj", "{C27097DA-72C5-242E-E130-2B2F4D362C3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hive-almost_done.Editor", "Hive-almost_done.Editor.csproj", "{74B64E9C-30B5-9E2D-898F-44486B47A4B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CCE73E4-2795-429C-C2F2-27B5191C3256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CCE73E4-2795-429C-C2F2-27B5191C3256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CCE73E4-2795-429C-C2F2-27B5191C3256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CCE73E4-2795-429C-C2F2-27B5191C3256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C27097DA-72C5-242E-E130-2B2F4D362C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C27097DA-72C5-242E-E130-2B2F4D362C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C27097DA-72C5-242E-E130-2B2F4D362C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C27097DA-72C5-242E-E130-2B2F4D362C3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74B64E9C-30B5-9E2D-898F-44486B47A4B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74B64E9C-30B5-9E2D-898F-44486B47A4B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74B64E9C-30B5-9E2D-898F-44486B47A4B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74B64E9C-30B5-9E2D-898F-44486B47A4B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

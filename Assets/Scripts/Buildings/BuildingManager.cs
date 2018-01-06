@@ -5,74 +5,76 @@ using System.Text;
 using UnityEngine;
 
 
-    public class BuildingManager : MonoBehaviour
+public class BuildingManager : MonoBehaviour
+{
+    public static event Action GameOver;
+
+    public GameObject Building;
+
+	public IBuilding _building
+    {
+        get { return Building.GetComponent<IBuilding>(); }
+    }
+
+    public void UpgradeBuilding()
+    {
+        if (_building.UpgradeCost > RtsManager.Gold)
+        {
+            throw new BuildingException("Zbyt mało zasobów na ulepszenie");
+        }
+
+        if (!_building.Upgrade())
+        {
+            throw new BuildingException("Poziom budynku jest maksymalny");
+        }
+
+        RtsManager.Gold -=_building.UpgradeCost;
+    }
+
+    public void Start()
+    {
+        BaseBuilding.Destroyed += BuildingDestroyed;
+    }
+
+    public void RepairBuilding()
     {
 
-	public void Update()
-	{
-
-		if (Player.DefaultPlayer!= null) {
-			gold = Player.DefaultPlayer.Credits;
-		}
-	}
-
-	public GameObject Building;
-	int gold = 0;
-
-	private IBuilding _building
+        if (RtsManager.Gold >= _building.FullRepairCost)
         {
-            get { return Building.GetComponent<IBuilding>(); }
+            RtsManager.Gold -=  _building.FullRepairCost;
+            _building.Repair(100);
         }
-
-        public void UpgradeBuilding()
+        else
         {
-            if (_building.UpgradeCost > gold)
-            {
-                throw new BuildingException("Zbyt mało zasobów na ulepszenie");
-            }
-
-            if (!_building.Upgrade())
-            {
-                throw new BuildingException("Poziom budynku jest maksymalny");
-            }
-
-            gold -= _building.UpgradeCost;
-        }
-
-        public void RepairBuilding()
-        {
-
-            if (gold >= _building.FullRepairCost)
-            {
-                gold -= _building.FullRepairCost;
-                _building.Repair(100);                
-            }
-            else
-            {
-                var repairPercentage = gold / _building.RepairCostPerHp;
-                var repairValue = repairPercentage * _building.RepairCostPerHp;
-                gold -= repairValue;
-                _building.Repair(repairPercentage);
-            }
-        }
-
-        public void SpawnUnit()
-        {
-            if (_building.UnitCost > gold)
-            {
-                throw new BuildingException("Zbyt mało zasobów na stworzenie jednostki");
-            }
-
-            _building.SpawnUnit();
-            gold -= _building.UnitCost;
+            var repairPercentage = RtsManager.Gold / _building.RepairCostPerHp;
+            var repairValue = repairPercentage * _building.RepairCostPerHp;
+            RtsManager.Gold -= repairValue;
+            _building.Repair(repairPercentage);
         }
     }
 
-    public class BuildingException : Exception
+    public void SpawnUnit()
     {
-        public BuildingException(string message) : base(message)
+        if (_building.UnitCost > RtsManager.Gold)
         {
-
+            throw new BuildingException("Zbyt mało zasobów na stworzenie jednostki");
         }
+
+        _building.SpawnUnit();
+        RtsManager.Gold -= _building.UnitCost;
     }
+
+    private void BuildingDestroyed()
+    {
+        GameOver();
+    }
+}
+
+public class BuildingException : Exception
+{
+    public BuildingException(string message) : base(message)
+    {
+
+    }
+}
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,11 +21,8 @@ namespace HiveAPI.Models
         }
 
         public Guid Id { get; set; }
-        [Required, MaxLength(80)]
         public string Username { get; set; }
-        [Required, MaxLength(80)]
         public string Email { get; set; }
-        [Required, MaxLength(180)]
         public string Password { get; set; }
     }
 }
