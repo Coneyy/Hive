@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class BuildingManager : MonoBehaviour
 {
     public static event Action GameOver;
 
     public GameObject Building;
+    public GameObject BuildingInfo;
+    public GameObject ResourcesInfo;
+    public GameObject LevelInfo;
+
+    private float time = 0;
+    private bool isMessage;
 
 	public IBuilding _building
     {
@@ -20,20 +26,30 @@ public class BuildingManager : MonoBehaviour
     {
         if (_building.UpgradeCost > RtsManager.Gold)
         {
-            throw new BuildingException("Zbyt mało zasobów na ulepszenie");
+            BuildingInfo.GetComponent<Text>().text = "Zbyt mało zasobów na ulepszenie";
+            isMessage = true;
+            return;
+            //throw new BuildingException("Zbyt mało zasobów na ulepszenie");            
         }
 
         if (!_building.Upgrade())
         {
-            throw new BuildingException("Poziom budynku jest maksymalny");
+            BuildingInfo.GetComponent<Text>().text = "Poziom budynku jest maksymalny";
+            isMessage = true;
+            return;
+            //throw new BuildingException("Poziom budynku jest maksymalny");
         }
 
         RtsManager.Gold -=_building.UpgradeCost;
+        LevelInfo.GetComponent<Text>().text = "Poziom " + _building.Level;
+        ResourcesInfo.GetComponent<Text>().text = "+ " +( (_building.Level + 1) * 50).ToString();
+        
     }
 
     public void Start()
     {
         BaseBuilding.Destroyed += BuildingDestroyed;
+        ResourcesInfo.GetComponent<Text>().text = "+ " + ((_building.Level + 1) * 50).ToString();
     }
 
     public void RepairBuilding()
@@ -57,7 +73,11 @@ public class BuildingManager : MonoBehaviour
     {
         if (_building.UnitCost > RtsManager.Gold)
         {
-            throw new BuildingException("Zbyt mało zasobów na stworzenie jednostki");
+            BuildingInfo.GetComponent<Text>().text = "Zbyt mało zasobów na stworzenie jednostki";
+            isMessage = true;
+            return;
+            //throw new BuildingException("Zbyt mało zasobów na stworzenie jednostki");
+
         }
 
         _building.SpawnUnit();
@@ -67,6 +87,18 @@ public class BuildingManager : MonoBehaviour
     private void BuildingDestroyed()
     {
         GameOver();
+    }
+
+    public void Update()
+    {
+       time+=Time.deltaTime;
+
+        if (isMessage && time > 4)
+        {
+            time = 0;
+            BuildingInfo.GetComponent<Text>().text = "";
+            isMessage = false;
+        }
     }
 }
 

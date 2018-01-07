@@ -173,7 +173,7 @@ public class BaseBuilding : BuildingInteractive, IBuilding
 
     public void SpawnUnit()
     {
-        networkManager.SpawnNewUnit(UnitSpawnPosition, "name", ShowUnitInfo.TYPE.WARRIORANT);
+        networkManager.SpawnNewUnit(UnitSpawnPosition, "Mrówka bojowa", ShowUnitInfo.TYPE.WARRIORANT);
     }
 
     public bool Upgrade()
