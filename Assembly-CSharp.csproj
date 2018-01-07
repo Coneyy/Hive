@@ -138,6 +138,7 @@
      <Compile Include="Assets\Scripts\Buildings\BuildingManager.cs" />
      <Compile Include="Assets\Scripts\Buildings\IBuilding.cs" />
      <Compile Include="Assets\Scripts\Definitions\PlayerSetupDefinitions.cs" />
+     <Compile Include="Assets\Scripts\EndGameScript.cs" />
      <Compile Include="Assets\Scripts\FogOfWar\FogOfWar.cs" />
      <Compile Include="Assets\Scripts\GUI\BottomPanelConnector.cs" />
      <Compile Include="Assets\Scripts\GUI\CodeGUI.cs" />
@@ -170,6 +171,7 @@
      <Compile Include="Assets\Scripts\Network\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerMark.cs" />
+     <Compile Include="Assets\Scripts\PositionSetter.cs" />
      <Compile Include="Assets\Scripts\ResourceScript.cs" />
      <Compile Include="Assets\Scripts\Rotation.cs" />
      <Compile Include="Assets\Scripts\RtsManager.cs" />
@@ -233,6 +235,7 @@
      <None Include="Assets\Photon Unity Networking\link.xml" />
      <None Include="Assets\readme_SDK.txt" />
      <None Include="Assets\Vuforia\Shaders\RenderVideoBackground.shader" />
+     <None Include="Assets\StreamingAssets\Vuforia\FreshDB.xml" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\Downloaded\Spider\readme.txt" />
      <None Include="Assets\Plugins\release_history.txt" />

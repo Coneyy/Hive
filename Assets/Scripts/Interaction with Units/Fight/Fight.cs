@@ -65,7 +65,7 @@ public class Fight : MonoBehaviour {
             }
 
 
-            if (!MainScreenUtils.isClose(enemy.transform.position, transform.position, 50))
+            if (!MainScreenUtils.isClose(enemy.transform.position, transform.position, 20))
             {
 
                 movingUnit.sendToTarget(enemy.transform.position);

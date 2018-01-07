@@ -39,7 +39,7 @@ public class MovingUnit : MonoBehaviour {
 
         if (!isActive) return;
 
-        if (MainScreenUtils.isClose(target, transform.position, 50)) // jeśli agent jest aktywny i jest już w pobliżu celu
+        if (MainScreenUtils.isClose(target, transform.position, 20)) // jeśli agent jest aktywny i jest już w pobliżu celu
         {
 			stopMoving ();
         }

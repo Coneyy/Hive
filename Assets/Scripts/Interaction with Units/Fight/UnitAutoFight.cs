@@ -93,7 +93,7 @@ public class UnitAutoFight : MonoBehaviour
         }
         if (enemy != null)
         {
-            if (!MainScreenUtils.isClose(enemy.transform.position, transform.position, 50)) // JEŚLI SĄ W ZASIĘGU WYSZUKIWANIA, LECZ DALEJ NIŻ 50 JEDNOSTEK
+            if (!MainScreenUtils.isClose(enemy.transform.position, transform.position, 20)) // JEŚLI SĄ W ZASIĘGU WYSZUKIWANIA, LECZ DALEJ NIŻ 20 JEDNOSTEK
             {
                 movingUnit.sendToTarget(enemy.transform.position); Debug.Log("WYSYŁAM DO WALKI!"); // TO WYŚLIJ DO WALKI 
             }

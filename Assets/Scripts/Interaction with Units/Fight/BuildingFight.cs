@@ -75,6 +75,6 @@ public class BuildingFight : MonoBehaviour {
 			gameObject.GetComponent<IBuilding>().BuildingDestroyed();
 		}
 	}
-	
+
 
 }

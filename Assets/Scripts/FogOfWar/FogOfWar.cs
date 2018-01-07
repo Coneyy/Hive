@@ -24,6 +24,7 @@ public class FogOfWar : MonoBehaviour
     public GameObject plants;
     public float darkColor;
     public int fogOffset;
+    public Transform terrainTransform;
 
 	private int frameCounter=0;
 	List<float> distances = new List<float>(); // tablica zawierający najmniejszy dystans pomiędzy obiektem a odkrywaczem
@@ -67,10 +68,10 @@ public class FogOfWar : MonoBehaviour
         {
           
             if (revealer.GetComponent<BuildingInteractive>() == null)
-				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
+				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x + 115, (int)revealer.transform.position.z + 135, revealer.GetComponent<ShowUnitInfo>().sight);
             else
             {
-				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x, (int)revealer.transform.position.z, revealer.GetComponent<ShowUnitInfo>().sight);
+				DrawFilledMidpointHexSinglePixelVisit((int)revealer.transform.position.x + 115, (int)revealer.transform.position.z +135, revealer.GetComponent<ShowUnitInfo>().sight);
 
             }
   
@@ -239,6 +240,7 @@ public class FogOfWar : MonoBehaviour
 
         }
 
+        terrainTransform = GameObject.Find("ImageTarget").transform;
     }
     private void Update()
     {

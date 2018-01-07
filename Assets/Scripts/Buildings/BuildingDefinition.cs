@@ -6,7 +6,7 @@ using System.Text;
 
     public static class BuildingDefinition
     {
-        public static int StartingLevel = 1;
+        public static int StartingLevel = 0;
         public static int StartingHealth = 800;
         public static int StartingMaxHealth = 800;
         public static int UnitCost = 100;

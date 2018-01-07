@@ -8,6 +8,7 @@ public class SendUnitToFight : MonoBehaviour {
     private GameObject Manager; // Przejście do skryptu zaznaczania jednostek
     private SelectManager sMManager; // skrypt do zaznaczania jednostek
     private Fight fight; //skrypt obsługujący walkę
+	private Interactive interactive;
 
 
 
@@ -17,6 +18,7 @@ public class SendUnitToFight : MonoBehaviour {
         Manager = GameObject.Find("Manager"); // połączenie do innych skryptów
         sMManager = Manager.GetComponent<SelectManager>();
         fight = GetComponent<Fight>();
+		interactive = GetComponent<Interactive> ();
 
 
 
@@ -29,7 +31,7 @@ public class SendUnitToFight : MonoBehaviour {
 
 		if (!GetComponent<ShowUnitInfo>().photonView.isMine) return; // jak nie jest to nasza jednostka, to wyłącz skrypt
 
-        if (sMManager.Selections.Count == 0) // jeśli nie ma zaznaczonych jednostek, wyłącz skrypt
+		if (!interactive.Selected) // jeśli jednostka nie jest zaznaczona, to wyłącz skrypt
             return;
 
         if (Input.touchCount == 0) // jeśli brak dotknięcia to koniec 
