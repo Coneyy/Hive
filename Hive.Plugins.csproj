@@ -116,6 +116,7 @@
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
     <None Include="Assets\StreamingAssets\QCAR\HiveDB.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\FreshDB.xml" />
     <None Include="Assets\StreamingAssets\build_info.txt" />
     <None Include="Assets\Vuforia\Editor\Scripts\Vuforia.UnityExtensions.Editor.XML" />
     <None Include="Assets\Vuforia\Editor\WebcamProfiles\profiles.xml" />

@@ -122,7 +122,7 @@ public class BaseBuilding : BuildingInteractive, IBuilding
     {
         get
         {
-            return new Vector3(transform.position.x + 20, transform.position.y, transform.position.z + 20);
+            return new Vector3(transform.position.x + 50, transform.position.y, transform.position.z + 50);
         }
     }
 
