@@ -41,7 +41,7 @@ public class ResourceScript :MonoBehaviour
 	int getResourceToAdd ()
 	{
 		int lvl = manager._building.Level;
-		return lvl * 50;
+		return (lvl+1) * 50;
 
 	}
 

@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 442}
+  m_MinSize: {x: 950, y: 421}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -42,10 +42,10 @@ MonoBehaviour:
     y: 30
     width: 2482
     height: 976
-  m_MinSize: {x: 713, y: 392}
-  m_MaxSize: {x: 18008, y: 14042}
+  m_MinSize: {x: 711, y: 371}
+  m_MaxSize: {x: 18006, y: 14021}
   vertical: 0
-  controlID: 71
+  controlID: 137
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -64,8 +64,8 @@ MonoBehaviour:
     y: 0
     width: 556
     height: 976
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -117,8 +117,8 @@ MonoBehaviour:
     y: 801
     width: 1926
     height: 175
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 17}
@@ -146,7 +146,7 @@ MonoBehaviour:
     y: 0
     width: 2482
     height: 1026
-  m_MinSize: {x: 950, y: 442}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -209,10 +209,10 @@ MonoBehaviour:
     y: 0
     width: 1926
     height: 976
-  m_MinSize: {x: 436, y: 392}
-  m_MaxSize: {x: 14006, y: 14042}
+  m_MinSize: {x: 436, y: 371}
+  m_MaxSize: {x: 14006, y: 14021}
   vertical: 1
-  controlID: 72
+  controlID: 138
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_MinSize: {x: 436, y: 271}
   m_MaxSize: {x: 14006, y: 10021}
   vertical: 0
-  controlID: 73
+  controlID: 139
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -401,19 +401,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Resources/Photon_prefabs/NotAnimated
+    - Assets/Scripts/Network
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Photon_prefabs/NotAnimated
+  - Assets/Scripts/Network
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Hive
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 202c0000
-    m_LastClickedID: 11296
-    m_ExpandedIDs: 00000000342700007a270000922800008c290000042b0000d82b0000262c0000c02c00002c2d0000482d0000002e0000022e0000082e0000bc2e000000ca9a3bffffff7f
+    m_SelectedIDs: dc2c0000
+    m_LastClickedID: 11484
+    m_ExpandedIDs: 000000005027000096270000202b0000422c0000dc2c0000482d0000642d00001c2e00001e2e0000242e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -441,7 +441,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 08310000
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000342700007a270000922800008c290000042b0000d82b0000262c0000c02c00002c2d0000482d0000002e0000022e0000082e0000bc2e0000
+    m_ExpandedIDs: 000000005027000096270000ae280000a8290000202b0000f42b0000422c0000dc2c0000482d0000642d00001c2e00001e2e0000242e0000d82e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -571,7 +571,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 159}
     m_SelectedIDs: 662d0000
     m_LastClickedID: 11622
-    m_ExpandedIDs: 00000000342700007a270000922800008c290000042b0000d82b0000262c0000c02c00002c2d0000482d0000002e0000022e0000082e0000bc2e0000
+    m_ExpandedIDs: 000000005027000096270000ae280000a8290000202b0000f42b0000422c0000dc2c0000482d0000642d00001c2e00001e2e0000242e0000d82e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -599,7 +599,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000342700007a270000922800008c290000042b0000d82b0000262c0000c02c00002c2d0000482d0000002e0000022e0000082e0000bc2e0000
+    m_ExpandedIDs: 000000005027000096270000ae280000a8290000202b0000f42b0000422c0000dc2c0000482d0000642d00001c2e00001e2e0000242e0000d82e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -717,21 +717,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: e6fbffff00000000
+    m_ExpandedIDs: 6a24ffff3a25ffffc226ffff807affff287bffffb27cffffe6fbffff00000000763100008e310000023300002c330000343300001e480000464b0000a44b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: StatusText
+      m_OriginalName: StatusText
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 18294
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -767,14 +767,14 @@ MonoBehaviour:
     width: 1020
     height: 780
   m_SceneLighting: 1
-  lastFramingTime: 3634.8361913002905
+  lastFramingTime: 78.28275384204474
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -202.78879, y: -399.19263, z: 540.3652}
+    m_Target: {x: 521.2828, y: 503.49597, z: 219.22113}
     speed: 2
-    m_Value: {x: -202.78879, y: -399.19263, z: 540.3652}
+    m_Value: {x: 521.2828, y: 503.49597, z: 219.22113}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -797,13 +797,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.2932418, y: 0.6116095, z: -0.26112178, w: -0.6868468}
+    m_Target: {x: -0.19749312, y: 0.082256734, z: -0.016633447, w: -0.9767055}
     speed: 2
-    m_Value: {x: -0.2932418, y: 0.6116095, z: -0.26112178, w: -0.6868468}
+    m_Value: {x: -0.19749312, y: 0.082256734, z: -0.016633447, w: -0.9767055}
   m_Size:
-    m_Target: 824.05426
+    m_Target: 967.05347
     speed: 2
-    m_Value: 824.05426
+    m_Value: 967.05347
   m_Ortho:
     m_Target: 0
     speed: 2

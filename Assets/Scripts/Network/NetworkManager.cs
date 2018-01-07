@@ -302,7 +302,7 @@ public class NetworkManager : Photon.PunBehaviour
 
     public void SpawnBuilding(Vector3 position)
     {
-        GameObject building = Spawn(position, "MOTHERBASE", ShowUnitInfo.TYPE.MOTHERBASE, buildingPrefab.name);
+        GameObject building = Spawn(position, "Baza", ShowUnitInfo.TYPE.MOTHERBASE, buildingPrefab.name);
         buildingManager.Building = building;
     }
 
